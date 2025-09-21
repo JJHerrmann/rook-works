@@ -1,0 +1,13 @@
+# OS noise
+.DS_Store
+Thumbs.db
+
+# Dreamweaver/Adobe
+_dws_/
+*.ste
+
+# Node (if/when you add tooling)
+node_modules/
+dist/
+.build/
+.env*
