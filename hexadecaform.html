@@ -151,7 +151,7 @@
     filter:url(#glow);
   }
   .node-label{
-    font-size:9.5px;
+    font-size:9px;
     fill:var(--ink);
     text-anchor:middle;
     pointer-events:none;
@@ -227,9 +227,6 @@
 </head>
 <body>
 <div class="wrap">
-  <h1>HR Hexadecaform</h1>
-  <div class="sub">One Microsoft Form, sixteen downstream flows. Click a spoke to see the STAR breakdown.</div>
-
   <div class="layout">
     <section class="hub-card">
       <div class="hub-title">
@@ -254,15 +251,32 @@
           <!-- outer background -->
           <circle cx="200" cy="200" r="180" class="hub-bg"></circle>
 
-          <!-- center forms tile -->
-          <rect x="150" y="165" width="100" height="70" rx="12" class="forms-center"></rect>
-          <rect x="158" y="173" width="28" height="28" rx="6" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"></rect>
-          <rect x="162" y="177" width="20" height="4" rx="2" fill="#107C41"></rect>
-          <rect x="162" y="185" width="14" height="3" rx="2" fill="#107C41" opacity=".8"></rect>
-          <rect x="162" y="192" width="10" height="3" rx="2" fill="#107C41" opacity=".7"></rect>
-          <text x="196" y="187" class="forms-label">Support Intake Form</text>
+<!-- center forms tile -->
+<rect x="150" y="165" width="100" height="70" rx="12" class="forms-center"></rect>
 
-          <!-- spokes and nodes will be injected by JS -->
+<!-- Forms logo -->
+<svg x="180" y="171" width="36" height="34" viewBox="0 0 430 400">
+  <path fill="#036c70" d="M430 200v181.7c0 10.1-8.2 18.3-18.3 18.3H118.3c-10.1 0-18.3-8.2-18.3-18.3V200l170-20 160 20z"/>
+  <path fill="#37c6d0" d="M118.3 0h293.4C421.8 0 430 8.2 430 18.3V200H100V18.3C100 8.2 108.2 0 118.3 0z"/>
+  <path fill="#1a9ba1" d="M280 250h100v100H280z"/>
+  <circle cx="330" cy="100" r="60" fill="#1a9ba1"/>
+  <circle cx="330" cy="100" r="30" fill="#036c70"/>
+  <path d="M221.7 80H100v250h121.7c10.1 0 18.3-8.2 18.3-18.3V98.3c0-10.1-8.2-18.3-18.3-18.3z" opacity=".1"/>
+  <path d="M211.7 90H100v250h111.7c10.1 0 18.3-8.2 18.3-18.3V108.3c0-10.1-8.2-18.3-18.3-18.3z" opacity=".2"/>
+  <path d="M211.7 90H100v230h111.7c10.1 0 18.3-8.2 18.3-18.3V108.3c0-10.1-8.2-18.3-18.3-18.3z" opacity=".2"/>
+  <path d="M201.7 90H100v230h101.7c10.1 0 18.3-8.2 18.3-18.3V108.3c0-10.1-8.2-18.3-18.3-18.3z" opacity=".2"/>
+  <linearGradient id="a" x1="38.2184" x2="181.7816" y1="326.3227" y2="77.6773" gradientTransform="matrix(1 0 0 -1 0 402)" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#058f92"/>
+    <stop offset=".5" stop-color="#038489"/>
+    <stop offset="1" stop-color="#026d71"/>
+  </linearGradient>
+  <path fill="url(#a)" d="M18.3 90h183.3c10.1 0 18.3 8.2 18.3 18.3v183.3c0 10.1-8.2 18.3-18.3 18.3H18.3C8.2 310 0 301.8 0 291.7V108.3C0 98.2 8.2 90 18.3 90z"/>
+  <path fill="#fff" d="M147.1 159.8H95.5v32.5h48.1v19.3H95.5v48H72.2V140.4h75l-.1 19.4z"/>
+</svg>
+
+<!-- text under logo -->
+<text x="160" y="220" class="forms-label">Support Intake</text>
+<!-- spokes and nodes will be injected by JS -->
         </svg>
       </div>
     </section>
@@ -310,11 +324,12 @@
 <script>
   const flows = [
     {
-      id:"p1",
-      label:"P1 Headset Requests",
-      short:"Headsets",
-      section:"Essential services",
-      services:["forms","flow","sharepoint","outlook","calendar"],
+    id:"p1",
+    label:"P1 Headset Requests",
+    labelLines:["Headset","Requests"],
+    short:"Headsets",
+    section:"Essential services",
+    services:["forms","flow","sharepoint","outlook","calendar"],
       star:{
         s:"Employees requested headsets using a mix of emails, drop boxes, and word of mouth, which made tracking inventory and approvals inconsistent.",
         t:"Standardize headset requests so that approvals, inventory assignments, and audit history all live in one place.",
@@ -323,11 +338,12 @@
       }
     },
     {
-      id:"p2",
-      label:"P2 Reasonable Accommodation Requests",
-      short:"RAC",
-      section:"Essential services",
-      services:["forms","flow","sharepoint","outlook","calendar"],
+    id:"p2",
+    label:"P2 Reasonable Accommodation Requests",
+    labelLines:["Accommodation", "Requests"],
+    short:"RAC",
+    section:"Essential services",
+    services:["forms","flow","sharepoint","outlook","calendar"],
       star:{
         s:"Reasonable Accommodation packets were requested in person or by email, with inconsistent language and no clear due date tracking.",
         t:"Make Reasonable Accommodation packet requests consistent, logged, and trackable with clear timelines for both the requester and specialist.",
@@ -336,11 +352,12 @@
       }
     },
     {
-      id:"p3",
-      label:"P3 Workman's Compensation Requests",
-      short:"Workman's comp",
-      section:"Essential services",
-      services:["forms","flow","sharepoint","outlook","calendar"],
+    id:"p3",
+    label:"P3 Workman's Compensation Requests",
+    labelLines:["Workman's","Comp Requests"],
+    short:"Workman's comp",
+    section:"Essential services",
+    services:["forms","flow","sharepoint","outlook","calendar"],
       star:{
         s:"Workman's Compensation packets were often requested under stress, with manual emailing of forms and no structured tracking of who sent what when.",
         t:"Provide a single, repeatable way to request Workman's Compensation packets and ensure the correct forms and notices go out every time.",
@@ -349,11 +366,12 @@
       }
     },
     {
-      id:"p4",
-      label:"P4 Termination Offboarding",
-      short:"Termination",
-      section:"Essential services",
-      services:["forms","flow","sharepoint","outlook","teams","calendar"],
+    id:"p4",
+    label:"P4 Termination Offboarding",
+    labelLines:["Termination","Offboarding"],
+    short:"Termination",
+    section:"Essential services",
+    services:["forms","flow","sharepoint","outlook","teams","calendar"],
       star:{
         s:"Termination and offboarding actions depended on individual emails and memory to alert TACs, Building Services, IT, and Admin, which made offboarding slow and risky.",
         t:"Create a single termination trigger that notifies all accountable teams, drives required paperwork, and enforces an SLA for cleanup.",
@@ -362,11 +380,12 @@
       }
     },
     {
-      id:"p5",
-      label:"P5 Parking Pass Requests",
-      short:"Parking",
-      section:"Essential services",
-      services:["forms","flow","sharepoint","outlook"],
+    id:"p5",
+    label:"P5 Parking Pass Requests",
+    labelLines:["Parking Pass","Requests"],
+    short:"Parking",
+    section:"Essential services",
+    services:["forms","flow","sharepoint","outlook"],
       star:{
         s:"Parking pass handling relied on whoever happened to be available, with manual emails and no consistent log of requests.",
         t:"Centralize parking pass requests so they can be tracked, prioritized, and fulfilled without chasing people.",
@@ -375,11 +394,12 @@
       }
     },
     {
-      id:"p6",
-      label:"P6 Building Services",
-      short:"Building svcs",
-      section:"Essential services",
-      services:["forms","flow","sharepoint","outlook","teams","calendar"],
+    id:"p6",
+    label:"P6 Building Services",
+    labelLines:["Building","Services"],
+    short:"Building svcs",
+    section:"Essential services",
+    services:["forms","flow","sharepoint","outlook","teams","calendar"],
       star:{
         s:"Building issues like HVAC, signage, and ergonomics came in via scattered channels, which made prioritization and follow up difficult.",
         t:"Give staff a single route to report building service needs and give Building Services a clean queue.",
@@ -390,10 +410,11 @@
     {
       id:"p7",
       label:"P7 Conference / Classroom Requests",
+      labelLines:["Conference Room", "Requests"],
       short:"Rooms",
       section:"Essential services",
       services:["forms","flow","sharepoint","outlook","teams","calendar"],
-      star:{
+            star:{
         s:"Conference and classroom reservations were managed through email chains and personal calendars, which caused conflicts and missed setups.",
         t:"Standardize how people request space and how the support team tracks reservations and setup tasks.",
         a:"Routed room requests through the intake form, logged requests with times, headcount, and equipment needs, notified training and support managers, and optionally created calendar events or Teams messages for confirmed reservations.",
@@ -403,6 +424,7 @@
     {
       id:"p8",
       label:"P8 Supply Orders",
+      labelLines:["Supply","Orders"],
       short:"Supplies",
       section:"Essential services",
       services:["forms","flow","sharepoint","outlook"],
@@ -416,6 +438,7 @@
     {
       id:"p9",
       label:"P9 Career Preference List",
+      labelLines:["Career", "Preference"],
       short:"Career prefs",
       section:"Preferences and schedule",
       services:["forms","flow","sharepoint","calendar"],
@@ -427,8 +450,9 @@
       }
     },
     {
-      id:"p10",
-      label:"P10 Non Career Preference List",
+        id:"p10",
+      label:"P10 Non-Career Preference List",
+      labelLines:["Non-Career","Preference"],
       short:"Non-career prefs",
       section:"Preferences and schedule",
       services:["forms","flow","sharepoint","calendar"],
@@ -442,6 +466,7 @@
     {
       id:"p11",
       label:"P11 Schedule Change Requests",
+      labelLines:["Schedule Change","Requests"],
       short:"Schedule changes",
       section:"Preferences and schedule",
       services:["forms","flow","sharepoint","outlook","calendar"],
@@ -455,6 +480,7 @@
     {
       id:"p12",
       label:"P12 Preferred Leave Requests",
+      labelLines:["Preferred Leave","Requests"],
       short:"Preferred leave",
       section:"Preferences and schedule",
       services:["forms","flow","sharepoint","outlook","calendar"],
@@ -468,6 +494,7 @@
     {
       id:"p13",
       label:"P13 Trainer Interest Application",
+      labelLines:["Trainer Interest","Application"],
       short:"Trainer interest",
       section:"Development and acting",
       services:["forms","flow","sharepoint","outlook"],
@@ -481,6 +508,7 @@
     {
       id:"p14",
       label:"P14 A/ SUPV Application",
+      labelLines:["A/ SUPV","Application"],
       short:"A/ SUPV",
       section:"Development and acting",
       services:["forms","flow","sharepoint","outlook"],
@@ -494,6 +522,7 @@
     {
       id:"p15",
       label:"P15 A/ Support Application",
+      labelLines:["A/ Support","Application"],
       short:"A/ Support",
       section:"Development and acting",
       services:["forms","flow","sharepoint","outlook"],
@@ -507,6 +536,7 @@
     {
       id:"p16",
       label:"P16 A/ Systems Application",
+      labelLines:["A/ Systems","Application"],
       short:"A/ Systems",
       section:"Development and acting",
       services:["forms","flow","sharepoint","outlook","teams"],
@@ -604,27 +634,28 @@
       label.setAttribute("class","node-label");
 
       const core = flow.label.replace(/^P\d+\s+/, "");
-      const parts = core.split(" ");
-      let top = core;
-      let bottom = "";
-      if(parts.length > 1){
-        bottom = parts.pop();
-        top = parts.join(" ");
+
+      // use explicit labelLines when available, else fall back
+      let lines;
+      if (Array.isArray(flow.labelLines) && flow.labelLines.length > 0) {
+        lines = flow.labelLines;
+      } else {
+        const parts = core.split(" ");
+        if (parts.length > 1) {
+          const last = parts.pop();
+          lines = [parts.join(" "), last];
+        } else {
+          lines = [core];
+        }
       }
 
-      const t1 = document.createElementNS(SVG_NS,"tspan");
-      t1.setAttribute("x", x2);
-      t1.setAttribute("dy", "0");
-      t1.textContent = top;
-      label.appendChild(t1);
-
-      if(bottom){
-        const t2 = document.createElementNS(SVG_NS,"tspan");
-        t2.setAttribute("x", x2);
-        t2.setAttribute("dy", "12");
-        t2.textContent = bottom;
-        label.appendChild(t2);
-      }
+      lines.forEach((txt, i) => {
+        const tspan = document.createElementNS(SVG_NS, "tspan");
+        tspan.setAttribute("x", x2);
+        tspan.setAttribute("dy", i === 0 ? "0" : "12");
+        tspan.textContent = txt;
+        label.appendChild(tspan);
+      });
 
       g.appendChild(label);
 
