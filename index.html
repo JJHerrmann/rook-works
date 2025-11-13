@@ -314,11 +314,25 @@ function HexdecaformCard() {
             ),
             React.createElement("div", { className: "mt-5 grid gap-4 md:grid-cols-12" },
               [
-                { t: "Training sheet rebuild", d: "USPS-like demo data, slicers, dashboards—no proprietary bits." },
-                { t: "Rookworks card kit", d: "Accessible HTML/CSS cards for fast landing pages." },
-                { t: "Challenger Bazaar", d: "eBay listing templates + photo pipeline." },
-                { t: "Agent_99", d: "Budget alerts and decision reports via LLM." },
-              ].map((p, i) =>
+  {
+    t: "Training sheet rebuild",
+    d: "USPS-like demo data, slicers, dashboards—no proprietary bits.",
+    img: "img/excel_vba_pa.png"
+  },
+  {
+    t: "Rookworks card kit",
+    d: "Accessible HTML/CSS cards for fast landing pages."
+  },
+  {
+    t: "Challenger Bazaar",
+    d: "eBay listing templates + photo pipeline."
+  },
+  {
+    t: "Agent_99",
+    d: "Budget alerts and decision reports via LLM."
+  },
+].map((p, i) =>
+
                 React.createElement("article", {
                   key: i,
                   className: "md:col-span-6 lg:col-span-3 border rounded-2xl overflow-hidden group",
