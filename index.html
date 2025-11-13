@@ -23,6 +23,140 @@
 
   <script type="text/javascript">
     const { useMemo } = React;
+	  
+function HexdecaformCard() {
+  const key = "#3a2a6f";
+  const key2 = "#6a329f";
+  const line = "#1b1f2a";
+
+  return React.createElement(
+    "section",
+    {
+      id: "hexdecaform",
+      className: "mx-auto max-w-7xl px-4 pb-14",
+    },
+    // section header
+    React.createElement(
+      "div",
+      { className: "flex items-end justify-between mb-4" },
+      React.createElement(
+        "div",
+        null,
+        React.createElement(
+          "div",
+          {
+            className:
+              "text-[11px] uppercase tracking-[0.18em] text-slate-400",
+          },
+          "Case study"
+        ),
+        React.createElement(
+          "h2",
+          { className: "mt-1 text-2xl font-semibold" },
+          "Support Hexdecaform"
+        ),
+        React.createElement(
+          "p",
+          { className: "mt-1 text-sm text-slate-300 max-w-prose" },
+          "One intake form driving sixteen downstream flows: requests, offboarding, preferences, and development paths in a large federal HR environment."
+        )
+      ),
+      React.createElement(
+        "a",
+        {
+          href: "#contact",
+          className:
+            "hidden md:inline-flex rounded-full border px-4 py-2 text-xs",
+          style: { borderColor: line },
+        },
+        "Talk about a similar build"
+      )
+    ),
+    // content grid
+    React.createElement(
+      "div",
+      { className: "grid gap-6 md:grid-cols-12 items-stretch" },
+      // left: quick summary
+      React.createElement(
+        "article",
+        {
+          className: "md:col-span-4 border rounded-2xl p-4 md:p-5",
+          style: {
+            borderColor: line,
+            background:
+              "linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.25))",
+          },
+        },
+        React.createElement(
+          "h3",
+          { className: "text-lg font-semibold" },
+          "What it is"
+        ),
+        React.createElement(
+          "p",
+          { className: "mt-2 text-sm text-slate-300" },
+          "Central intake pattern: one Microsoft Form, sixteen flows routed by type into HR, IT, facilities, training, and scheduling teams."
+        ),
+        React.createElement("div", {
+          className: "mt-3 h-px",
+          style: { background: line },
+        }),
+        React.createElement(
+          "ul",
+          { className: "mt-3 grid gap-2 text-sm text-slate-300" },
+          React.createElement(
+            "li",
+            null,
+            "RBAC checks on who can trigger sensitive actions"
+          ),
+          React.createElement(
+            "li",
+            null,
+            "SharePoint logging for audit and reporting"
+          ),
+          React.createElement(
+            "li",
+            null,
+            "Outlook/Teams notifications and SLA timers"
+          )
+        ),
+        React.createElement(
+          "p",
+          { className: "mt-3 text-xs text-slate-400" },
+          "The live demo below uses anonymized flows and fake data; the structure matches the production pattern."
+        )
+      ),
+      // right: iframe with your existing HTML
+      React.createElement(
+        "div",
+        { className: "md:col-span-8" },
+        React.createElement("div", {
+          className: "rounded-2xl border mb-2",
+          style: {
+            borderColor: line,
+            background:
+              "linear-gradient(120deg, " +
+              key +
+              "22, " +
+              key2 +
+              "22), #05060a",
+          },
+        }),
+        React.createElement("iframe", {
+          src: "hexdecaform.html", // adjust path if needed
+          title: "Support Hexdecaform demo",
+          className: "w-full rounded-2xl border",
+          style: {
+            borderColor: line,
+            minHeight: "520px",
+            background: "#05060a",
+          },
+          loading: "lazy",
+        })
+      )
+    )
+  );
+}
 
     function RookWorksLander() {
       const key = "#3a2a6f"; // Future Dusk approx
@@ -204,6 +338,11 @@
               )
             )
           ),
+							
+							
+		// Hexadecaform<br>
+React.createElement(HexdecaformCard),
+
           // Case + Agentic
           React.createElement("section", { id: "case", className: "mx-auto max-w-7xl px-4 pb-14" },
             React.createElement("div", { className: "grid gap-6 md:grid-cols-12 items-stretch" },
