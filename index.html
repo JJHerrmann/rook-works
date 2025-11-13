@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Rook.works — 2026 Lander (Future Dusk)</title>
+  <title>Rook.works - 2026 Lander (Future Dusk)</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -11,7 +11,7 @@
     }
   </script>
   <style>
-    html,body,#root { height: 100%; }
+    html, body, #root { height: 100%; }
   </style>
 </head>
 <body class="bg-black text-slate-100">
@@ -23,140 +23,140 @@
 
   <script type="text/javascript">
     const { useMemo } = React;
-	  
-function HexdecaformCard() {
-  const key = "#3a2a6f";
-  const key2 = "#6a329f";
-  const line = "#1b1f2a";
 
-  return React.createElement(
-    "section",
-    {
-      id: "hexdecaform",
-      className: "mx-auto max-w-7xl px-4 pb-14",
-    },
-    // section header
-    React.createElement(
-      "div",
-      { className: "flex items-end justify-between mb-4" },
-      React.createElement(
-        "div",
-        null,
+    function HexdecaformCard() {
+      const key = "#3a2a6f";
+      const key2 = "#6a329f";
+      const line = "#1b1f2a";
+
+      return React.createElement(
+        "section",
+        {
+          id: "hexdecaform",
+          className: "mx-auto max-w-7xl px-4 pb-14",
+        },
+        // section header
         React.createElement(
           "div",
-          {
-            className:
-              "text-[11px] uppercase tracking-[0.18em] text-slate-400",
-          },
-          "Case study"
-        ),
-        React.createElement(
-          "h2",
-          { className: "mt-1 text-2xl font-semibold" },
-          "Support Hexdecaform"
-        ),
-        React.createElement(
-          "p",
-          { className: "mt-1 text-sm text-slate-300 max-w-prose" },
-          "One intake form driving sixteen downstream flows: requests, offboarding, preferences, and development paths in a large federal HR environment."
-        )
-      ),
-      React.createElement(
-        "a",
-        {
-          href: "#contact",
-          className:
-            "hidden md:inline-flex rounded-full border px-4 py-2 text-xs",
-          style: { borderColor: line },
-        },
-        "Talk about a similar build"
-      )
-    ),
-    // content grid
-    React.createElement(
-      "div",
-      { className: "grid gap-6 md:grid-cols-12 items-stretch" },
-      // left: quick summary
-      React.createElement(
-        "article",
-        {
-          className: "md:col-span-4 border rounded-2xl p-4 md:p-5",
-          style: {
-            borderColor: line,
-            background:
-              "linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.25))",
-          },
-        },
-        React.createElement(
-          "h3",
-          { className: "text-lg font-semibold" },
-          "What it is"
-        ),
-        React.createElement(
-          "p",
-          { className: "mt-2 text-sm text-slate-300" },
-          "Central intake pattern: one Microsoft Form, sixteen flows routed by type into HR, IT, facilities, training, and scheduling teams."
-        ),
-        React.createElement("div", {
-          className: "mt-3 h-px",
-          style: { background: line },
-        }),
-        React.createElement(
-          "ul",
-          { className: "mt-3 grid gap-2 text-sm text-slate-300" },
+          { className: "flex items-end justify-between mb-4" },
           React.createElement(
-            "li",
+            "div",
             null,
-            "RBAC checks on who can trigger sensitive actions"
+            React.createElement(
+              "div",
+              {
+                className:
+                  "text-[11px] uppercase tracking-[0.18em] text-slate-400",
+              },
+              "Case study"
+            ),
+            React.createElement(
+              "h2",
+              { className: "mt-1 text-2xl font-semibold" },
+              "Support Hexdecaform"
+            ),
+            React.createElement(
+              "p",
+              { className: "mt-1 text-sm text-slate-300 max-w-prose" },
+              "One intake form driving sixteen downstream flows: requests, offboarding, preferences, and development paths in a large federal HR environment."
+            )
           ),
           React.createElement(
-            "li",
-            null,
-            "SharePoint logging for audit and reporting"
-          ),
-          React.createElement(
-            "li",
-            null,
-            "Outlook/Teams notifications and SLA timers"
+            "a",
+            {
+              href: "#contact",
+              className:
+                "hidden md:inline-flex rounded-full border px-4 py-2 text-xs",
+              style: { borderColor: line },
+            },
+            "Talk about a similar build"
           )
         ),
+        // content grid
         React.createElement(
-          "p",
-          { className: "mt-3 text-xs text-slate-400" },
-          "The live demo below uses anonymized flows and fake data; the structure matches the production pattern."
+          "div",
+          { className: "grid gap-6 md:grid-cols-12 items-stretch" },
+          // left: quick summary
+          React.createElement(
+            "article",
+            {
+              className: "md:col-span-4 border rounded-2xl p-4 md:p-5",
+              style: {
+                borderColor: line,
+                background:
+                  "linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.25))",
+              },
+            },
+            React.createElement(
+              "h3",
+              { className: "text-lg font-semibold" },
+              "What it is"
+            ),
+            React.createElement(
+              "p",
+              { className: "mt-2 text-sm text-slate-300" },
+              "Central intake pattern: one Microsoft Form, sixteen flows routed by type into HR, IT, facilities, training, and scheduling teams."
+            ),
+            React.createElement("div", {
+              className: "mt-3 h-px",
+              style: { background: line },
+            }),
+            React.createElement(
+              "ul",
+              { className: "mt-3 grid gap-2 text-sm text-slate-300" },
+              React.createElement(
+                "li",
+                null,
+                "RBAC checks on who can trigger sensitive actions"
+              ),
+              React.createElement(
+                "li",
+                null,
+                "SharePoint logging for audit and reporting"
+              ),
+              React.createElement(
+                "li",
+                null,
+                "Outlook/Teams notifications and SLA timers"
+              )
+            ),
+            React.createElement(
+              "p",
+              { className: "mt-3 text-xs text-slate-400" },
+              "The live demo below uses anonymized flows and fake data; the structure matches the production pattern."
+            )
+          ),
+          // right: iframe with your existing HTML
+          React.createElement(
+            "div",
+            { className: "md:col-span-8" },
+            React.createElement("div", {
+              className: "rounded-2xl border mb-2",
+              style: {
+                borderColor: line,
+                background:
+                  "linear-gradient(120deg, " +
+                  key +
+                  "22, " +
+                  key2 +
+                  "22), #05060a",
+              },
+            }),
+            React.createElement("iframe", {
+              src: "hexadecaform.html", // adjust path if needed
+              title: "Support Hexdecaform demo",
+              className: "w-full rounded-2xl border",
+              style: {
+                borderColor: line,
+                minHeight: "520px",
+                background: "#05060a",
+              },
+              loading: "lazy",
+            })
+          )
         )
-      ),
-      // right: iframe with your existing HTML
-      React.createElement(
-        "div",
-        { className: "md:col-span-8" },
-        React.createElement("div", {
-          className: "rounded-2xl border mb-2",
-          style: {
-            borderColor: line,
-            background:
-              "linear-gradient(120deg, " +
-              key +
-              "22, " +
-              key2 +
-              "22), #05060a",
-          },
-        }),
-        React.createElement("iframe", {
-          src: "hexadecaform.html", // adjust path if needed
-          title: "Support Hexdecaform demo",
-          className: "w-full rounded-2xl border",
-          style: {
-            borderColor: line,
-            minHeight: "520px",
-            background: "#05060a",
-          },
-          loading: "lazy",
-        })
-      )
-    )
-  );
-}
+      );
+    }
 
     function RookWorksLander() {
       const key = "#3a2a6f"; // Future Dusk approx
@@ -192,218 +192,604 @@ function HexdecaformCard() {
         []
       );
 
-      const slide = useMemo(() => heroSlides[Math.floor(Math.random() * heroSlides.length)], [heroSlides]);
+      const slide = useMemo(
+        () => heroSlides[Math.floor(Math.random() * heroSlides.length)],
+        [heroSlides]
+      );
 
-      return (
-        React.createElement("div", {
-            className: "min-h-screen text-slate-100",
-            style: {
-              background:
-                `radial-gradient(1200px 600px at 10% -10%, ${key}22, transparent),` +
-                `radial-gradient(900px 500px at 110% 0%, ${key2}1f, transparent),` +
-                mist,
-            }
+      return React.createElement(
+        "div",
+        {
+          className: "min-h-screen text-slate-100",
+          style: {
+            background:
+              "radial-gradient(1200px 600px at 10% -10%, " +
+              key +
+              "22, transparent)," +
+              "radial-gradient(900px 500px at 110% 0%, " +
+              key2 +
+              "1f, transparent)," +
+              mist,
           },
-          // Header
-          React.createElement("header", {
+        },
+        // Header
+        React.createElement(
+          "header",
+          {
             className: "sticky top-0 z-40 backdrop-blur border-b",
-            style: { borderColor: line, background: "rgba(0,0,0,0.3)" }
+            style: { borderColor: line, background: "rgba(0,0,0,0.3)" },
           },
-            React.createElement("div", { className: "mx-auto max-w-7xl px-4 py-3 flex items-center gap-6" },
-              React.createElement("div", { className: "flex items-center gap-3" },
-                React.createElement("div", { className: "w-8 h-8 rounded-lg", style: { background: `conic-gradient(from 180deg, ${key}, ${key2})` } }),
-                React.createElement("span", { className: "font-semibold tracking-wide" }, "Rook.works"),
+          React.createElement(
+            "div",
+            {
+              className:
+                "mx-auto max-w-7xl px-4 py-3 flex items-center gap-6",
+            },
+            React.createElement(
+              "div",
+              { className: "flex items-center gap-3" },
+              React.createElement("div", {
+                className: "w-8 h-8 rounded-lg",
+                style: {
+                  background:
+                    "conic-gradient(from 180deg, " + key + ", " + key2 + ")",
+                },
+              }),
+              React.createElement(
+                "span",
+                { className: "font-semibold tracking-wide" },
+                "Rook.works"
+              )
+            ),
+            React.createElement(
+              "nav",
+              {
+                className:
+                  "ml-auto hidden md:flex items-center gap-6 text-sm text-slate-300",
+              },
+              React.createElement(
+                "a",
+                { className: "hover:text-white", href: "#work" },
+                "Work"
               ),
-              React.createElement("nav", { className: "ml-auto hidden md:flex items-center gap-6 text-sm text-slate-300" },
-                React.createElement("a", { className: "hover:text-white", href: "#work" }, "Work"),
-                React.createElement("a", { className: "hover:text-white", href: "#services" }, "Services"),
-                React.createElement("a", { className: "hover:text-white", href: "#case" }, "Case studies"),
-                React.createElement("a", { className: "hover:text-white", href: "#contact" }, "Contact"),
+              React.createElement(
+                "a",
+                { className: "hover:text-white", href: "#services" },
+                "Services"
               ),
-              React.createElement("a", {
+              React.createElement(
+                "a",
+                { className: "hover:text-white", href: "#case" },
+                "Case studies"
+              ),
+              React.createElement(
+                "a",
+                { className: "hover:text-white", href: "#contact" },
+                "Contact"
+              )
+            ),
+            React.createElement(
+              "a",
+              {
                 href: "#contact",
-                className: "ml-auto md:ml-0 inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm border",
+                className:
+                  "ml-auto md:ml-0 inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm border",
                 style: {
                   borderColor: line,
-                  background: "linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.15))",
-                }
-              }, "Start a project")
+                  background:
+                    "linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.15))",
+                },
+              },
+              "Start a project"
             )
-          ),
-          // Hero
-          React.createElement("section", { className: "relative" },
-            React.createElement("div", { className: "mx-auto max-w-7xl px-4 pt-16 pb-20 grid gap-8 items-start md:grid-cols-12" },
-              React.createElement("div", { className: "md:col-span-7" },
-                React.createElement("p", { className: "uppercase text-xs tracking-[0.2em] text-slate-400" }, slide.kicker),
-                React.createElement("h1", { className: "mt-3 text-4xl md:text-6xl font-semibold leading-[1.05]" }, slide.title),
-                React.createElement("p", { className: "mt-4 text-slate-300 max-w-prose" }, slide.body),
-                React.createElement("div", { className: "mt-8 flex flex-wrap gap-3" },
-                  React.createElement("a", {
-                    href: "#playbook",
-                    className: "rounded-full px-5 py-3 text-sm font-medium",
-                    style: {
-                      background: `linear-gradient(90deg, ${key}, ${key2})`,
-                      boxShadow: `0 8px 24px ${key}55`,
-                    }
-                  }, slide.cta),
-                  React.createElement("a", { href: "#work", className: "rounded-full px-5 py-3 text-sm font-medium border border-white/10" }, "Explore work")
-                )
+          )
+        ),
+        // Hero
+        React.createElement(
+          "section",
+          { className: "relative" },
+          React.createElement(
+            "div",
+            {
+              className:
+                "mx-auto max-w-7xl px-4 pt-16 pb-20 grid gap-8 items-start md:grid-cols-12",
+            },
+            React.createElement(
+              "div",
+              { className: "md:col-span-7" },
+              React.createElement(
+                "p",
+                {
+                  className:
+                    "uppercase text-xs tracking-[0.2em] text-slate-400",
+                },
+                slide.kicker
               ),
-              React.createElement("div", { className: "md:col-span-5" },
-                React.createElement("div", {
+              React.createElement(
+                "h1",
+                {
+                  className:
+                    "mt-3 text-4xl md:text-6xl font-semibold leading-[1.05]",
+                },
+                slide.title
+              ),
+              React.createElement(
+                "p",
+                { className: "mt-4 text-slate-300 max-w-prose" },
+                slide.body
+              ),
+              React.createElement(
+                "div",
+                { className: "mt-8 flex flex-wrap gap-3" },
+                React.createElement(
+                  "a",
+                  {
+                    href: "#playbook",
+                    className:
+                      "rounded-full px-5 py-3 text-sm font-medium",
+                    style: {
+                      background:
+                        "linear-gradient(90deg, " + key + ", " + key2 + ")",
+                      boxShadow: "0 8px 24px " + key + "55",
+                    },
+                  },
+                  slide.cta
+                ),
+                React.createElement(
+                  "a",
+                  {
+                    href: "#work",
+                    className:
+                      "rounded-full px-5 py-3 text-sm font-medium border border-white/10",
+                  },
+                  "Explore work"
+                )
+              )
+            ),
+            React.createElement(
+              "div",
+              { className: "md:col-span-5" },
+              React.createElement(
+                "div",
+                {
                   className: "rounded-2xl border p-4 md:p-6 shadow-xl",
                   style: {
                     borderColor: line,
-                    background: "linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.35))",
-                    boxShadow: `0 10px 40px ${key}33`,
-                  }
+                    background:
+                      "linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.35))",
+                    boxShadow: "0 10px 40px " + key + "33",
+                  },
                 },
-                  React.createElement("div", { className: "text-sm text-slate-300" }, "Rookworks focus"),
-                  React.createElement("ul", { className: "mt-3 grid gap-3 text-sm text-slate-200" },
-                    React.createElement("li", { className: "flex items-center gap-2" },
-                      React.createElement("span", { className: "w-2 h-2 rounded-full", style: { background: key } }),
-                      "Ops & training rebuilds"),
-                    React.createElement("li", { className: "flex items-center gap-2" },
-                      React.createElement("span", { className: "w-2 h-2 rounded-full", style: { background: key } }),
-                      "Excel/BI dashboards"),
-                    React.createElement("li", { className: "flex items-center gap-2" },
-                      React.createElement("span", { className: "w-2 h-2 rounded-full", style: { background: key } }),
-                      "Component-driven web design"),
-                    React.createElement("li", { className: "flex items-center gap-2" },
-                      React.createElement("span", { className: "w-2 h-2 rounded-full", style: { background: key } }),
-                      "LLM workflows with guardrails"),
+                React.createElement(
+                  "div",
+                  { className: "text-sm text-slate-300" },
+                  "Rookworks focus"
+                ),
+                React.createElement(
+                  "ul",
+                  { className: "mt-3 grid gap-3 text-sm text-slate-200" },
+                  React.createElement(
+                    "li",
+                    { className: "flex items-center gap-2" },
+                    React.createElement("span", {
+                      className: "w-2 h-2 rounded-full",
+                      style: { background: key },
+                    }),
+                    "Ops and training rebuilds"
                   ),
-                  React.createElement("div", { className: "mt-4", style: { height: "1px", background: line } }),
-                  React.createElement("div", { className: "mt-4 flex items-center justify-between" },
-                    React.createElement("span", { className: "text-xs text-slate-400" }, "Keycolor"),
-                    React.createElement("div", { className: "flex items-center gap-2" },
-                      React.createElement("div", { className: "w-6 h-6 rounded", style: { background: key } }),
-                      React.createElement("div", { className: "w-6 h-6 rounded", style: { background: key2 } }),
-                    )
+                  React.createElement(
+                    "li",
+                    { className: "flex items-center gap-2" },
+                    React.createElement("span", {
+                      className: "w-2 h-2 rounded-full",
+                      style: { background: key },
+                    }),
+                    "Excel and BI dashboards"
+                  ),
+                  React.createElement(
+                    "li",
+                    { className: "flex items-center gap-2" },
+                    React.createElement("span", {
+                      className: "w-2 h-2 rounded-full",
+                      style: { background: key },
+                    }),
+                    "Component driven web design"
+                  ),
+                  React.createElement(
+                    "li",
+                    { className: "flex items-center gap-2" },
+                    React.createElement("span", {
+                      className: "w-2 h-2 rounded-full",
+                      style: { background: key },
+                    }),
+                    "LLM workflows with guardrails"
+                  )
+                ),
+                React.createElement("div", {
+                  className: "mt-4",
+                  style: { height: "1px", background: line },
+                }),
+                React.createElement(
+                  "div",
+                  {
+                    className:
+                      "mt-4 flex items-center justify-between",
+                  },
+                  React.createElement(
+                    "span",
+                    { className: "text-xs text-slate-400" },
+                    "Keycolor"
+                  ),
+                  React.createElement(
+                    "div",
+                    { className: "flex items-center gap-2" },
+                    React.createElement("div", {
+                      className: "w-6 h-6 rounded",
+                      style: { background: key },
+                    }),
+                    React.createElement("div", {
+                      className: "w-6 h-6 rounded",
+                      style: { background: key2 },
+                    })
                   )
                 )
               )
             )
-          ),
-          // Services
-          React.createElement("section", { id: "services", className: "mx-auto max-w-7xl px-4 pb-6 md:pb-10" },
-            React.createElement("div", { className: "grid gap-4 md:grid-cols-12" },
-              [
-                { eyebrow: "Ops", title: "Process tune-ups", body: "Audits, SOPs, and training flows to cut time-to-competence and error rates." },
-                { eyebrow: "Design", title: "Card-first UI kits", body: "Reusable components for sites, dashboards, and storefronts." },
-                { eyebrow: "Data", title: "Dashboards that answer", body: "XLOOKUP/XLSX to BI stacks; clear visuals, no clown charts." },
-                { eyebrow: "AI", title: "Agentic automations", body: "LLM flows that plan, verify, and log—useful, safe, auditable." },
-              ].map((c, i) =>
-                React.createElement("article", {
+          )
+        ),
+        // Services
+        React.createElement(
+          "section",
+          { id: "services", className: "mx-auto max-w-7xl px-4 pb-6 md:pb-10" },
+          React.createElement(
+            "div",
+            { className: "grid gap-4 md:grid-cols-12" },
+            [
+              {
+                eyebrow: "Ops",
+                title: "Process tune ups",
+                body:
+                  "Audits, SOPs, and training flows to cut time to competence and error rates.",
+              },
+              {
+                eyebrow: "Design",
+                title: "Card first UI kits",
+                body:
+                  "Reusable components for sites, dashboards, and storefronts.",
+              },
+              {
+                eyebrow: "Data",
+                title: "Dashboards that answer",
+                body:
+                  "XLOOKUP and XLSX to BI stacks; clear visuals, no clown charts.",
+              },
+              {
+                eyebrow: "AI",
+                title: "Agentic automations",
+                body:
+                  "LLM flows that plan, verify, and log, useful, safe, auditable.",
+              },
+            ].map(function (c, i) {
+              return React.createElement(
+                "article",
+                {
                   key: i,
-                  className: "md:col-span-6 border rounded-2xl p-5 transition-transform hover:-translate-y-0.5",
-                  style: { borderColor: line, background: "linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.25))" }
+                  className:
+                    "md:col-span-6 border rounded-2xl p-5 transition-transform hover:-translate-y-0.5",
+                  style: {
+                    borderColor: line,
+                    background:
+                      "linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.25))",
+                  },
                 },
-                  React.createElement("div", { className: "text-[11px] uppercase tracking-[0.18em] text-slate-400" }, c.eyebrow),
-                  React.createElement("h3", { className: "mt-2 text-xl font-semibold" }, c.title),
-                  React.createElement("p", { className: "mt-1 text-sm text-slate-300" }, c.body),
+                React.createElement(
+                  "div",
+                  {
+                    className:
+                      "text-[11px] uppercase tracking-[0.18em] text-slate-400",
+                  },
+                  c.eyebrow
+                ),
+                React.createElement(
+                  "h3",
+                  { className: "mt-2 text-xl font-semibold" },
+                  c.title
+                ),
+                React.createElement(
+                  "p",
+                  { className: "mt-1 text-sm text-slate-300" },
+                  c.body
                 )
-              )
-            )
-          ),
-          // Work grid
-          React.createElement("section", { id: "work", className: "mx-auto max-w-7xl px-4 pt-6 pb-14" },
-            React.createElement("div", { className: "flex items-end justify-between" },
-              React.createElement("h2", { className: "text-2xl font-semibold" }, "Recent work"),
-              React.createElement("a", { className: "text-sm text-slate-300 hover:text-white", href: "#" }, "All projects →")
+              );
+            })
+          )
+        ),
+        // Work grid
+        React.createElement(
+          "section",
+          { id: "work", className: "mx-auto max-w-7xl px-4 pt-6 pb-14" },
+          React.createElement(
+            "div",
+            { className: "flex items-end justify-between" },
+            React.createElement(
+              "h2",
+              { className: "text-2xl font-semibold" },
+              "Recent work"
             ),
-            React.createElement("div", { className: "mt-5 grid gap-4 md:grid-cols-12" },
-              [
-  {
-    t: "Training sheet rebuild",
-    d: "USPS-like demo data, slicers, dashboards—no proprietary bits.",
-    img: "https://rook.works/img/excel_vba_pa.png"
-  },
-  {
-    t: "Rookworks card kit",
-    d: "Accessible HTML/CSS cards for fast landing pages."
-  },
-  {
-    t: "Challenger Bazaar",
-    d: "eBay listing templates + photo pipeline."
-  },
-  {
-    t: "Agent_99",
-    d: "Budget alerts and decision reports via LLM."
-  },
-].map((p, i) =>
-
-                React.createElement("article", {
+            React.createElement(
+              "a",
+              {
+                className:
+                  "text-sm text-slate-300 hover:text-white",
+                href: "#",
+              },
+              "All projects ->"
+            )
+          ),
+          React.createElement(
+            "div",
+            { className: "mt-5 grid gap-4 md:grid-cols-12" },
+            [
+              {
+                t: "Training sheet rebuild",
+                d:
+                  "USPS like demo data, slicers, dashboards, no proprietary bits.",
+                img: "/img/excel_vba_pa.png",
+              },
+              {
+                t: "Rookworks card kit",
+                d:
+                  "Accessible HTML and CSS cards for fast landing pages.",
+              },
+              {
+                t: "Challenger Bazaar",
+                d:
+                  "eBay listing templates and photo pipeline.",
+              },
+              {
+                t: "Agent_99",
+                d:
+                  "Budget alerts and decision reports via LLM.",
+              },
+            ].map(function (p, i) {
+              return React.createElement(
+                "article",
+                {
                   key: i,
-                  className: "md:col-span-6 lg:col-span-3 border rounded-2xl overflow-hidden group",
-                  style: { borderColor: line }
+                  className:
+                    "md:col-span-6 lg:col-span-3 border rounded-2xl overflow-hidden group",
+                  style: { borderColor: line },
                 },
-                  React.createElement("div", {
-                    className: "h-36",
-                    style: {
-                      background: `linear-gradient(120deg, ${key}33, ${key2}33), radial-gradient(600px 300px at 70% -10%, ${key}22, transparent), #101217`,
-                    }
-                  }),
-                  React.createElement("div", { className: "p-4" },
-                    React.createElement("h3", { className: "font-semibold" }, p.t),
-                    React.createElement("p", { className: "text-sm text-slate-300" }, p.d),
+                React.createElement(
+                  "div",
+                  { className: "h-36 relative overflow-hidden" },
+                  p.img
+                    ? React.createElement("img", {
+                        src: p.img,
+                        alt: p.t,
+                        className: "w-full h-full object-cover",
+                      })
+                    : React.createElement("div", {
+                        className: "w-full h-full",
+                        style: {
+                          background:
+                            "linear-gradient(120deg, " +
+                            key +
+                            "33, " +
+                            key2 +
+                            "33), radial-gradient(600px 300px at 70% -10%, " +
+                            key +
+                            "22, transparent), #101217",
+                        },
+                      })
+                ),
+                React.createElement(
+                  "div",
+                  { className: "p-4" },
+                  React.createElement(
+                    "h3",
+                    { className: "font-semibold" },
+                    p.t
+                  ),
+                  React.createElement(
+                    "p",
+                    { className: "text-sm text-slate-300" },
+                    p.d
                   )
                 )
-              )
-            )
-          ),
-							
-							
-		// Hexadecaform<br>
-React.createElement(HexdecaformCard),
-
-          // Case + Agentic
-          React.createElement("section", { id: "case", className: "mx-auto max-w-7xl px-4 pb-14" },
-            React.createElement("div", { className: "grid gap-6 md:grid-cols-12 items-stretch" },
-              React.createElement("article", { className: "md:col-span-7 border rounded-2xl p-6", style: { borderColor: line } },
-                React.createElement("div", { className: "text-[11px] uppercase tracking-[0.18em] text-slate-400" }, "Case study"),
-                React.createElement("h3", { className: "mt-2 text-2xl font-semibold" }, "Training rebuild: from chaos to cadence"),
-                React.createElement("p", { className: "mt-2 text-slate-300" },
-                  "Three-step migration: extract patterns, design SOPs, ship dashboards. Result: faster ramp, fewer errors, calmer managers."
-                ),
-                React.createElement("a", { className: "mt-4 inline-flex rounded-full border px-4 py-2 text-sm", style: { borderColor: line }, href: "#" }, "Read the breakdown"),
+              );
+            })
+          )
+        ),
+        // Hexdecaform
+        React.createElement(HexdecaformCard),
+        // Case + Agentic
+        React.createElement(
+          "section",
+          { id: "case", className: "mx-auto max-w-7xl px-4 pb-14" },
+          React.createElement(
+            "div",
+            { className: "grid gap-6 md:grid-cols-12 items-stretch" },
+            React.createElement(
+              "article",
+              {
+                className: "md:col-span-7 border rounded-2xl p-6",
+                style: { borderColor: line },
+              },
+              React.createElement(
+                "div",
+                {
+                  className:
+                    "text-[11px] uppercase tracking-[0.18em] text-slate-400",
+                },
+                "Case study"
               ),
-              React.createElement("aside", { className: "md:col-span-5 border rounded-2xl p-6", style: { borderColor: line } },
-                React.createElement("div", { className: "text-[11px] uppercase tracking-[0.18em] text-slate-400" }, "Agentic block"),
-                React.createElement("h4", { className: "mt-2 text-xl font-semibold" }, "LLM with guardrails"),
-                React.createElement("ul", { className: "mt-3 grid gap-2 text-sm text-slate-300" },
-                  React.createElement("li", null, "Plan → do → check loops"),
-                  React.createElement("li", null, "Red-team prompts + audit logs"),
-                  React.createElement("li", null, "PII scrubs and data minimization"),
+              React.createElement(
+                "h3",
+                { className: "mt-2 text-2xl font-semibold" },
+                "Training rebuild: from chaos to cadence"
+              ),
+              React.createElement(
+                "p",
+                { className: "mt-2 text-slate-300" },
+                "Three step migration: extract patterns, design SOPs, ship dashboards. Result: faster ramp, fewer errors, calmer managers."
+              ),
+              React.createElement(
+                "a",
+                {
+                  className:
+                    "mt-4 inline-flex rounded-full border px-4 py-2 text-sm",
+                  style: { borderColor: line },
+                  href: "#",
+                },
+                "Read the breakdown"
+              )
+            ),
+            React.createElement(
+              "aside",
+              {
+                className: "md:col-span-5 border rounded-2xl p-6",
+                style: { borderColor: line },
+              },
+              React.createElement(
+                "div",
+                {
+                  className:
+                    "text-[11px] uppercase tracking-[0.18em] text-slate-400",
+                },
+                "Agentic block"
+              ),
+              React.createElement(
+                "h4",
+                { className: "mt-2 text-xl font-semibold" },
+                "LLM with guardrails"
+              ),
+              React.createElement(
+                "ul",
+                { className: "mt-3 grid gap-2 text-sm text-slate-300" },
+                React.createElement(
+                  "li",
+                  null,
+                  "Plan -> do -> check loops"
                 ),
-                React.createElement("a", { className: "mt-4 inline-flex rounded-full px-4 py-2 text-sm", href: "#", style: { background: `linear-gradient(90deg, ${key}, ${key2})` } }, "See a live flow"),
+                React.createElement(
+                  "li",
+                  null,
+                  "Red team prompts and audit logs"
+                ),
+                React.createElement(
+                  "li",
+                  null,
+                  "PII scrubs and data minimization"
+                )
+              ),
+              React.createElement(
+                "a",
+                {
+                  className:
+                    "mt-4 inline-flex rounded-full px-4 py-2 text-sm",
+                  href: "#",
+                  style: {
+                    background:
+                      "linear-gradient(90deg, " + key + ", " + key2 + ")",
+                  },
+                },
+                "See a live flow"
               )
             )
-          ),
-          // Contact
-          React.createElement("section", { id: "contact", className: "mx-auto max-w-7xl px-4 pb-20" },
-            React.createElement("div", { className: "border rounded-2xl p-6 md:p-8", style: { borderColor: line } },
-              React.createElement("div", { className: "grid gap-6 md:grid-cols-12 items-center" },
-                React.createElement("div", { className: "md:col-span-7" },
-                  React.createElement("h3", { className: "text-2xl font-semibold" }, "Got friction? Let's sand it down."),
-                  React.createElement("p", { className: "mt-2 text-slate-300 max-w-prose" },
-                    "Drop a line with your messiest problem. We'll scope a tidy, measurable fix and ship a plan in plain English."
-                  )
+          )
+        ),
+        // Contact
+        React.createElement(
+          "section",
+          { id: "contact", className: "mx-auto max-w-7xl px-4 pb-20" },
+          React.createElement(
+            "div",
+            {
+              className: "border rounded-2xl p-6 md:p-8",
+              style: { borderColor: line },
+            },
+            React.createElement(
+              "div",
+              {
+                className:
+                  "grid gap-6 md:grid-cols-12 items-center",
+              },
+              React.createElement(
+                "div",
+                { className: "md:col-span-7" },
+                React.createElement(
+                  "h3",
+                  { className: "text-2xl font-semibold" },
+                  "Got friction? Lets sand it down."
                 ),
-                React.createElement("form", { className: "md:col-span-5 grid gap-3", onSubmit: (e) => e.preventDefault() },
-                  React.createElement("input", { className: "rounded-xl bg-black/30 border px-3 py-2", placeholder: "Name", style: { borderColor: line } }),
-                  React.createElement("input", { className: "rounded-xl bg-black/30 border px-3 py-2", placeholder: "Email", style: { borderColor: line } }),
-                  React.createElement("textarea", { className: "rounded-xl bg-black/30 border px-3 py-2 h-24", placeholder: "What needs fixing?", style: { borderColor: line } }),
-                  React.createElement("button", { className: "rounded-full px-5 py-3 text-sm font-medium", style: { background: `linear-gradient(90deg, ${key}, ${key2})` } }, "Send"),
+                React.createElement(
+                  "p",
+                  { className: "mt-2 text-slate-300 max-w-prose" },
+                  "Drop a line with your messiest problem. We will scope a tidy, measurable fix and ship a plan in plain English."
+                )
+              ),
+              React.createElement(
+                "form",
+                {
+                  className: "md:col-span-5 grid gap-3",
+                  onSubmit: function (e) {
+                    e.preventDefault();
+                  },
+                },
+                React.createElement("input", {
+                  className:
+                    "rounded-xl bg-black/30 border px-3 py-2",
+                  placeholder: "Name",
+                  style: { borderColor: line },
+                }),
+                React.createElement("input", {
+                  className:
+                    "rounded-xl bg-black/30 border px-3 py-2",
+                  placeholder: "Email",
+                  style: { borderColor: line },
+                }),
+                React.createElement("textarea", {
+                  className:
+                    "rounded-xl bg-black/30 border px-3 py-2 h-24",
+                  placeholder: "What needs fixing?",
+                  style: { borderColor: line },
+                }),
+                React.createElement(
+                  "button",
+                  {
+                    className:
+                      "rounded-full px-5 py-3 text-sm font-medium",
+                    style: {
+                      background:
+                        "linear-gradient(90deg, " + key + ", " + key2 + ")",
+                    },
+                  },
+                  "Send"
                 )
               )
             )
-          ),
-          // Footer
-          React.createElement("footer", { className: "border-t", style: { borderColor: line } },
-            React.createElement("div", { className: "mx-auto max-w-7xl px-4 py-8 text-sm text-slate-400 flex flex-wrap gap-4 justify-between" },
-              React.createElement("span", null, `© ${new Date().getFullYear()} Rook.works`),
-              React.createElement("span", null, "Future Dusk palette. Built with cards, not chaos."),
+          )
+        ),
+        // Footer
+        React.createElement(
+          "footer",
+          { className: "border-t", style: { borderColor: line } },
+          React.createElement(
+            "div",
+            {
+              className:
+                "mx-auto max-w-7xl px-4 py-8 text-sm text-slate-400 flex flex-wrap gap-4 justify-between",
+            },
+            React.createElement(
+              "span",
+              null,
+              "© " + new Date().getFullYear() + " Rook.works"
+            ),
+            React.createElement(
+              "span",
+              null,
+              "Future Dusk palette. Built with cards, not chaos."
             )
           )
         )
