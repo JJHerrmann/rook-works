@@ -10,7 +10,39 @@
   </style>
 </head>
 <body>
-  <div id="root"></div>
+  <header
+  class="sticky top-0 z-40 backdrop-blur border-b"
+  style="border-color: #1b1f2a; background: rgba(0,0,0,0.3)"
+>
+  <div class="mx-auto max-w-7xl px-4 py-3 flex items-center gap-6">
+
+    <!-- Brand block -->
+    <a href="/" class="flex items-center gap-3">
+      <img src="/img/rook-mask.svg" class="w-8 h-8 rounded-lg" />
+      <span class="font-semibold tracking-wide">Rook.works</span>
+    </a>
+
+    <!-- Nav -->
+    <nav class="ml-auto hidden md:flex items-center gap-6 text-sm text-slate-300">
+      <a class="hover:text-white" href="/#work">Work</a>
+      <a class="hover:text-white" href="/#services">Services</a>
+      <a class="hover:text-white" href="/#case">Case studies</a>
+      <a class="hover:text-white" href="/#contact">Contact</a>
+    </nav>
+
+    <!-- CTA -->
+    <a
+      href="/#contact"
+      class="ml-auto md:ml-0 inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm border"
+      style="border-color: #1b1f2a; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.15))"
+    >
+      Start a project
+    </a>
+
+  </div>
+</header>
+
+	<div id="root"></div>
 <script>
   window.PROJECT_DATA = {
     title: "Training Sheet Rebuild",

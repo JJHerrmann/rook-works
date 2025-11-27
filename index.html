@@ -159,7 +159,7 @@
       );
     }
 
-    function RookWorksLander() {
+     function RookWorksLander() {
       const key = "#3a2a6f"; // Future Dusk approx
       const key2 = "#6a329f";
       const mist = "#0b0c11";
@@ -407,6 +407,7 @@
                   "ul",
                   { className: "mt-3 grid gap-3 text-sm text-slate-200" },
                   React.createElement(
+
                     "li",
                     { className: "flex items-center gap-2" },
                     React.createElement("span", {
@@ -450,8 +451,7 @@
                 React.createElement(
                   "div",
                   {
-                    className:
-                      "mt-4 flex items-center justify-between",
+                    className: "mt-4 flex items-center justify-between",
                   },
                   React.createElement(
                     "span",
@@ -559,8 +559,7 @@
             React.createElement(
               "a",
               {
-                className:
-                  "text-sm text-slate-300 hover:text-white",
+                className: "text-sm text-slate-300 hover:text-white",
                 href: "/projects/index.html",
               },
               "All projects ->"
@@ -581,7 +580,6 @@
                 },
                 React.createElement(
                   "div",
-
                   { className: "h-36 relative overflow-hidden" },
                   p.img
                     ? React.createElement("img", {
@@ -641,11 +639,11 @@
               },
               React.createElement(
                 "div",
-                {
-                  className:
-                    "text-[11px] uppercase tracking-[0.18em] text-slate-400",
-                },
-                "Case study"
+                  {
+                    className:
+                      "text-[11px] uppercase tracking-[0.18em] text-slate-400",
+                  },
+                  "Case study"
               ),
               React.createElement(
                 "h3",
@@ -736,8 +734,7 @@
             React.createElement(
               "div",
               {
-                className:
-                  "grid gap-6 md:grid-cols-12 items-center",
+                className: "grid gap-6 md:grid-cols-12 items-center",
               },
               React.createElement(
                 "div",
@@ -796,30 +793,229 @@
           )
         ),
 
-        // Footer
+        // Footer (new multi-column one)
         React.createElement(
           "footer",
-          { className: "border-t", style: { borderColor: line } },
+          { className: "border-t mt-10", style: { borderColor: line } },
           React.createElement(
             "div",
             {
               className:
-                "mx-auto max-w-7xl px-4 py-8 text-sm text-slate-400 flex flex-wrap gap-4 justify-between",
+                "mx-auto max-w-7xl px-4 py-10 grid gap-8 md:grid-cols-4 text-sm",
             },
+
+            // Col 1: Brand
             React.createElement(
-              "span",
+              "div",
               null,
-              "© " + new Date().getFullYear() + " Rook.works"
+              React.createElement(
+                "div",
+                { className: "flex items-center gap-2 mb-3" },
+                React.createElement("img", {
+                  src: "/img/rook-mask.svg",
+                  className: "w-7 h-7 rounded-lg",
+                }),
+                React.createElement(
+                  "span",
+                  { className: "font-semibold tracking-wide" },
+                  "Rook.works"
+                )
+              ),
+              React.createElement(
+                "p",
+                { className: "text-slate-300 max-w-xs" },
+                "I build HR workflows, automations, and tooling that calm chaos in large organizations."
+              ),
+              React.createElement(
+                "p",
+                { className: "mt-2 text-xs text-slate-400" },
+                "Current focus: HR automation, people analytics, internal tools roles."
+              )
             ),
+
+            // Col 2: HR Systems
             React.createElement(
-              "span",
+              "div",
               null,
-              "Future Dusk palette. Built with cards, not chaos."
+              React.createElement(
+                "h4",
+                {
+                  className:
+                    "text-xs font-semibold tracking-[0.18em] uppercase text-slate-400",
+                },
+                "HR Systems"
+              ),
+              React.createElement(
+                "ul",
+                { className: "mt-3 space-y-1 text-slate-300" },
+                React.createElement(
+                  "li",
+                  null,
+                  React.createElement(
+                    "a",
+                    {
+                      href: "/projects/training-attendance.html",
+                      className: "hover:text-white",
+                    },
+                    "Training compliance tracker"
+                  )
+                ),
+                React.createElement(
+                  "li",
+                  null,
+                  React.createElement(
+                    "a",
+                    {
+                      href: "/projects/hexadecaform.html",
+                      className: "hover:text-white",
+                    },
+                    "Hexdecaform intake pattern"
+                  )
+                ),
+                React.createElement(
+                  "li",
+                  null,
+                  React.createElement(
+                    "a",
+                    { href: "#work", className: "hover:text-white" },
+                    "More HR projects"
+                  )
+                )
+              )
+            ),
+
+            // Col 3: AI & Tools Lab
+            React.createElement(
+              "div",
+              null,
+              React.createElement(
+                "h4",
+                {
+                  className:
+                    "text-xs font-semibold tracking-[0.18em] uppercase text-slate-400",
+                },
+                "AI & Tools Lab"
+              ),
+              React.createElement(
+                "ul",
+                { className: "mt-3 space-y-1 text-slate-300" },
+                React.createElement(
+                  "li",
+                  null,
+                  React.createElement(
+                    "a",
+                    {
+                      href: "/projects/agent-99.html",
+                      className: "hover:text-white",
+                    },
+                    "Agent_99 decision assistant"
+                  )
+                ),
+                React.createElement(
+                  "li",
+                  null,
+                  React.createElement(
+                    "a",
+                    {
+                      href: "/projects/card-kit.html",
+                      className: "hover:text-white",
+                    },
+                    "Internal UI card kit"
+                  )
+                ),
+                React.createElement(
+                  "li",
+                  null,
+                  React.createElement(
+                    "a",
+                    { href: "#case", className: "hover:text-white" },
+                    "LLM guardrail patterns"
+                  )
+                )
+              )
+            ),
+
+            // Col 4: Worlds & Shops
+            React.createElement(
+              "div",
+              null,
+              React.createElement(
+                "h4",
+                {
+                  className:
+                    "text-xs font-semibold tracking-[0.18em] uppercase text-slate-400",
+                },
+                "Worlds & Shops"
+              ),
+              React.createElement(
+                "ul",
+                { className: "mt-3 space-y-1 text-slate-300" },
+                React.createElement(
+                  "li",
+                  null,
+                  React.createElement(
+                    "a",
+                    {
+                      href: "https://bloodline.rook.works",
+                      className: "hover:text-white",
+                    },
+                    "Bloodline: Spirits of the Smokies"
+                  )
+                ),
+                React.createElement(
+                  "li",
+                  null,
+                  React.createElement(
+                    "a",
+                    {
+                      href: "/projects/challenger-bazaar.html",
+                      className: "hover:text-white",
+                    },
+                    "Challenger Bazaar listing system"
+                  )
+                ),
+                React.createElement(
+                  "li",
+                  null,
+                  React.createElement(
+                    "a",
+                    {
+                      href: "https://shop.rook.works",
+                      className: "hover:text-white",
+                    },
+                    "Card & merch experiments"
+                  )
+                )
+              )
+            )
+          ),
+
+          // bottom bar
+          React.createElement(
+            "div",
+            { className: "border-t", style: { borderColor: line } },
+            React.createElement(
+              "div",
+              {
+                className:
+                  "mx-auto max-w-7xl px-4 py-4 text-xs text-slate-500 flex flex-wrap gap-3 justify-between",
+              },
+              React.createElement(
+                "span",
+                null,
+                "© " + new Date().getFullYear() + " Rook.works"
+              ),
+              React.createElement(
+                "span",
+                null,
+                "Future Dusk palette. Systems first, gradients second."
+              )
             )
           )
         )
       );
     }
+
 
     const root = ReactDOM.createRoot(document.getElementById("root"));
     root.render(React.createElement(RookWorksLander));
