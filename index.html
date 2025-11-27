@@ -196,7 +196,33 @@
         () => heroSlides[Math.floor(Math.random() * heroSlides.length)],
         [heroSlides]
       );
-
+		        const projects = useMemo(
+        () => [
+          {
+            t: "Training attendance architecture",
+            d: "Rebuilt manual training tracking into a structured, export-ready workbook with fake USPS style data.",
+            img: "/img/excel_vba_pa.png",
+            href: "/projects/training-attendance.html",
+          },
+          {
+            t: "Rookworks card kit",
+            d: "Accessible HTML/Tailwind card patterns for fast landing pages.",
+            href: "/projects/card-kit.html",
+          },
+          {
+            t: "Challenger Bazaar",
+            d: "eBay listing templates and a photo-to-listing pipeline.",
+            href: "/projects/challenger-bazaar.html",
+          },
+          {
+            t: "Agent_99",
+            d: "Budget watchdog and decision reports wired through an LLM core.",
+            img: "/img/aipersona.png",
+            href: "/projects/agent-99.html",
+          },
+        ],
+        []
+      );
       return React.createElement(
         "div",
         {
@@ -505,7 +531,7 @@
           )
         ),
         // Work grid
-        React.createElement(
+               React.createElement(
           "section",
           { id: "work", className: "mx-auto max-w-7xl px-4 pt-6 pb-14" },
           React.createElement(
@@ -529,36 +555,14 @@
           React.createElement(
             "div",
             { className: "mt-5 grid gap-4 md:grid-cols-12" },
-            [
-              {
-                t: "Training sheet rebuild",
-                d:
-                  "USPS like demo data, slicers, dashboards, no proprietary bits.",
-                img: "/img/excel_vba_pa.png",
-              },
-              {
-                t: "Rookworks card kit",
-                d:
-                  "Accessible HTML and CSS cards for fast landing pages.",
-              },
-              {
-                t: "Challenger Bazaar",
-                d:
-                  "eBay listing templates and photo pipeline.",
-              },
-              {
-                t: "Agent_99",
-                d:
-                  "Budget alerts and decision reports via LLM.",
-				  img: "/img/aipersona.png",
-              },
-            ].map(function (p, i) {
+            projects.map(function (p, i) {
               return React.createElement(
-                "article",
+                "a",
                 {
                   key: i,
+                  href: p.href || "#",
                   className:
-                    "md:col-span-6 lg:col-span-3 border rounded-2xl overflow-hidden group",
+                    "md:col-span-6 lg:col-span-3 border rounded-2xl overflow-hidden group focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-black focus:ring-slate-400",
                   style: { borderColor: line },
                 },
                 React.createElement(
@@ -568,7 +572,8 @@
                     ? React.createElement("img", {
                         src: p.img,
                         alt: p.t,
-                        className: "w-full h-full object-cover",
+                        className:
+                          "w-full h-full object-cover transition-transform duration-150 group-hover:scale-[1.03]",
                       })
                     : React.createElement("div", {
                         className: "w-full h-full",
@@ -589,7 +594,7 @@
                   { className: "p-4" },
                   React.createElement(
                     "h3",
-                    { className: "font-semibold" },
+                    { className: "font-semibold group-hover:text-white" },
                     p.t
                   ),
                   React.createElement(
@@ -602,6 +607,7 @@
             })
           )
         ),
+
         // Hexdecaform
         React.createElement(HexdecaformCard),
         // Case + Agentic

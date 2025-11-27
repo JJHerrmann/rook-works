@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Agent_99 – Rook.works</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { background:#0b0c11; color:#e5e7eb; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <!-- React libs FIRST -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+
+  <!-- Then your project data -->
+  <script>
+    window.PROJECT_DATA = {
+      title: "Agent_99",
+      description: "Budget alerts and decision reports via LLM, built for HR and finance teams that need audit trails.",
+      hero: "/img/99.png",
+      summary: "Agent_99 watches budget data, flags weirdness, and explains what changed in plain language, with logs you could hand to audit without blushing.",
+      images: [
+        "/img/agent99_mock1.png",
+        "/img/agent99_mock2.png"
+      ],
+      steps: [
+        "Connect to a read only view of your budget or export CSVs on a schedule.",
+        "Run rules and heuristics to spot variance, overspend, and pattern breaks.",
+        "Use LLM to draft human readable explanations and suggested actions.",
+        "Log every alert, query, and response for review and compliance.",
+        "Tighten rules over time based on what you actually act on."
+      ]
+    };
+  </script>
+
+  <!-- Then the React code that uses it -->
+  <script>
+    (function () {
+      const props = window.PROJECT_DATA || {
+        title: "Project",
+        description: "",
+        hero: "",
+        summary: "",
+        images: [],
+        steps: []
+      };
+
+      function ProjectPage() {
+        return React.createElement(
+          "div",
+          { className: "max-w-4xl mx-auto px-4 py-10" },
+
+          // Header
+          React.createElement(
+            "header",
+            { className: "mb-12" },
+            React.createElement(
+              "a",
+              { href: "/", className: "text-slate-400 text-sm hover:text-white" },
+              "Back to home"
+            ),
+            React.createElement(
+              "h1",
+              { className: "text-4xl font-bold mt-4" },
+              props.title
+            ),
+            React.createElement(
+              "p",
+              { className: "text-slate-300 mt-2 max-w-prose" },
+              props.description
+            )
+          ),
+
+          // Hero image
+          props.hero &&
+            React.createElement("img", {
+              src: props.hero,
+              alt: props.title,
+              className: "w-full rounded-2xl mb-10 shadow-xl"
+            }),
+
+          // Summary
+          React.createElement(
+            "section",
+            { className: "mb-12" },
+            React.createElement(
+              "h2",
+              { className: "text-xl font-semibold mb-3" },
+              "Summary"
+            ),
+            React.createElement(
+              "p",
+              { className: "text-slate-300 max-w-prose" },
+              props.summary
+            )
+          ),
+
+          // Screenshots
+          props.images && props.images.length > 0 &&
+            React.createElement(
+              "section",
+              { className: "mb-12 grid gap-4" },
+              props.images.map(function (src, i) {
+                return React.createElement("img", {
+                  key: i,
+                  src: src,
+                  className: "w-full rounded-xl border border-slate-800 shadow"
+                });
+              })
+            ),
+
+          // Process
+          React.createElement(
+            "section",
+            { className: "mb-12" },
+            React.createElement(
+              "h2",
+              { className: "text-xl font-semibold mb-3" },
+              "How it works"
+            ),
+
+            React.createElement(
+              "ul",
+              { className: "space-y-3 text-slate-300" },
+              (props.steps || []).map(function (s, i) {
+                return React.createElement("li", { key: i }, "• ", s);
+              })
+            )
+          ),
+
+          // CTA
+          React.createElement(
+            "footer",
+            { className: "mt-12 p-6 rounded-2xl border border-slate-800 bg-black/20" },
+            React.createElement(
+              "h3",
+              { className: "text-xl font-semibold mb-2" },
+              "Need a similar build?"
+            ),
+            React.createElement(
+              "p",
+              { className: "text-slate-300 mb-3 max-w-prose" },
+              "Tell me what stack you are on and what hurts. I will scope a tidy, measurable fix."
+            ),
+            React.createElement(
+              "a",
+              {
+                href: "/#contact",
+                className: "inline-block px-5 py-3 rounded-full bg-purple-600 hover:bg-purple-700"
+              },
+              "Get in touch"
+            )
+          )
+        );
+      }
+
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(React.createElement(ProjectPage));
+    })();
+  </script>
+</body>
+</html>

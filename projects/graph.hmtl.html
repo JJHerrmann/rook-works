@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="emerald">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bloodline Graph</title>
+  <meta name="description" content="Spirits, stones, characters, and loci.">
+  <!-- Theme loader first -->
+  <script>
+    (function() {
+      const urlTheme = new URLSearchParams(location.search).get("theme");
+      const saved = localStorage.getItem("theme");
+      const preset = document.documentElement.getAttribute("data-theme");
+      const theme = urlTheme || saved || preset || "quartz";
+      document.documentElement.setAttribute("data-theme", theme);
+      if (urlTheme) localStorage.setItem("theme", urlTheme);
+      window.setTheme = function(name){ document.documentElement.setAttribute("data-theme", name); localStorage.setItem("theme", name); };
+    })();
+  </script>
+
+  <!-- Tailwind CDN (for quick layout text) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Cytoscape -->
+  <script src="https://unpkg.com/cytoscape@3.26.0/dist/cytoscape.min.js"></script>
+
+  <style>
+    /* tokens: same scheme you already use */
+    :root {
+      --bg: 248 249 251; --fg: 17 20 24; --muted: 229 233 240; --card: 255 255 255; --border: 210 215 225;
+      --accent: 163 163 163; --accent-fg: 17 20 24; --g1: 255 255 255; --g2: 229 233 240;
+    }
+    [data-theme="garnet"]   { --bg:12 8 10; --fg:245 240 242; --muted:34 22 26; --card:18 12 14; --border:64 36 42; --accent:155 28 49; --accent-fg:255 240 243; --g1:40 16 22; --g2:12 8 10; }
+    [data-theme="citrine"]  { --bg:255 252 244; --fg:26 20 7; --muted:249 242 220; --card:255 254 248; --border:230 212 170; --accent:224 161 0; --accent-fg:26 20 7; --g1:255 247 222; --g2:255 252 244; }
+    [data-theme="quartz"]   { --bg:248 249 251; --fg:17 20 24; --muted:229 233 240; --card:255 255 255; --border:210 215 225; --accent:163 163 163; --accent-fg:17 20 24; --g1:255 255 255; --g2:229 233 240; }
+    [data-theme="sapphire"] { --bg:6 12 28; --fg:230 239 255; --muted:14 24 54; --card:10 18 40; --border:28 48 92; --accent:37 99 235; --accent-fg:245 250 255; --g1:12 24 56; --g2:6 12 28; }
+    [data-theme="ruby"]     { --bg:20 6 8; --fg:251 235 238; --muted:48 14 18; --card:28 9 12; --border:76 18 24; --accent:239 68 68; --accent-fg:255 245 245; --g1:60 12 18; --g2:20 6 8; }
+    [data-theme="amethyst"] { --bg:16 10 28; --fg:240 235 255; --muted:32 20 54; --card:22 14 38; --border:62 40 92; --accent:124 58 237; --accent-fg:250 245 255; --g1:42 24 86; --g2:16 10 28; }
+    [data-theme="emerald"]  { --bg:6 16 14; --fg:230 250 244; --muted:12 28 24; --card:10 22 20; --border:28 64 54; --accent:16 185 129; --accent-fg:2 32 24; --g1:10 28 24; --g2:6 16 14; }
+
+    html, body { height: 100%; }
+    body { background: rgb(var(--bg)); color: rgb(var(--fg)); }
+    #cy {
+      height: calc(100vh - 72px);
+      border-top: 1px solid rgb(var(--border));
+      background:
+        radial-gradient(120% 70% at 50% 0%, rgb(var(--g1))/0.25, transparent 60%),
+        linear-gradient(to bottom, rgb(var(--g1))/0.10, rgb(var(--g2))/0.50);
+    }
+  </style>
+</head>
+<body class="antialiased">
+  <header class="mx-auto max-w-6xl px-4 py-4 flex items-center justify-between">
+    <h1 class="text-xl font-bold">Bloodline Graph</h1>
+    <div class="flex gap-2">
+      <a href="/index.html" class="inline-flex items-center gap-2 whitespace-nowrap rounded-md px-3 py-2 text-sm font-semibold bg-[rgb(var(--accent))] text-[rgb(var(--accent-fg))] hover:bg-[rgb(var(--accent))]/90">Back</a>
+      <select id="themeSel" class="rounded-md border border-[rgb(var(--border))] bg-[rgb(var(--card))] px-2 py-1 text-sm">
+        <option value="garnet">garnet</option><option value="citrine">citrine</option><option value="quartz">quartz</option>
+        <option value="sapphire">sapphire</option><option value="ruby">ruby</option><option value="amethyst">amethyst</option><option value="emerald">emerald</option>
+      </select>
+    </div>
+  </header>
+
+  <div id="cy"></div>
+
+  <script>
+    // Demo data. Swap for a fetch('/data/graph.json') later.
+    const DATA = {
+      nodes: [
+        // spirits
+        { id:'velandor', label:'Velandor', type:'spirit', article:'/spirits/velandor.html', stone:'sapphire' },
+        { id:'arthmon',  label:'Arthmon',  type:'spirit', article:'/spirits/arthmon.html',  stone:'garnet' },
+        // stones
+        { id:'stone_sapphire', label:'Sapphire', type:'stone' },
+        { id:'stone_garnet',   label:'Garnet',   type:'stone' },
+        // characters
+        { id:'judah', label:'Judah Sands', type:'character', article:'/characters/judah.html' },
+        { id:'levi',  label:'Levi Sands',  type:'character', article:'/characters/levi.html' },
+        { id:'temperance', label:'Temperance Bennett', type:'character', article:'/characters/temperance.html' },
+        // loci
+        { id:'l_leap',  label:"Lovers Leap", type:'locus' },
+        { id:'l_paint', label:"Paint Rock",  type:'locus' }
+      ],
+      edges: [
+        // spirit -> stone
+        { a:'velandor', b:'stone_sapphire', rel:'bound' },
+        { a:'arthmon',  b:'stone_garnet',   rel:'bound' },
+        // spirit -> characters
+        { a:'velandor', b:'judah', rel:'warns' },
+        { a:'velandor', b:'temperance', rel:'seen by' },
+        { a:'arthmon',  b:'levi', rel:'claims' },
+        { a:'arthmon',  b:'judah', rel:'opposes' },
+        // spirit -> loci
+        { a:'velandor', b:'l_leap', rel:'sign' },
+        { a:'arthmon',  b:'l_paint', rel:'manifest' }
+      ]
+    };
+
+    // Build Cytoscape elements
+    const elements = [
+      ...DATA.nodes.map(n => ({ data: n })),
+      ...DATA.edges.map(e => ({ data: { id: e.a+'_'+e.b, source: e.a, target: e.b, rel: e.rel } }))
+    ];
+
+    const cy = cytoscape({
+      container: document.getElementById('cy'),
+      elements,
+      layout: { name:'cose', animate: true, padding: 30, nodeRepulsion: 12000, idealEdgeLength: 120 },
+      wheelSensitivity: 0.25,
+      style: [
+        {
+          selector: 'node',
+          style: {
+            'background-color': 'rgb(var(--card))',
+            'border-color': 'rgb(var(--border))',
+            'border-width': 2,
+            'color': 'rgb(var(--fg))',
+            'label': 'data(label)',
+            'font-size': 12,
+            'text-valign': 'center',
+            'text-halign': 'center',
+            'text-wrap': 'wrap',
+            'text-max-width': 120,
+            'width': 42,
+            'height': 42,
+            'shape': 'round-rectangle',
+            'transition-property': 'background-color, border-color, color',
+            'transition-duration': 200
+          }
+        },
+        { selector: 'node[type="spirit"]',
+          style: {
+            'background-color': 'rgb(var(--accent))',
+            'color': 'rgb(var(--accent-fg))',
+            'border-color': 'rgb(var(--accent))',
+            'width': 56, 'height': 56
+          }
+        },
+        { selector: 'node[type="stone"]', style: { 'shape': 'hexagon' } },
+        { selector: 'node[type="character"]', style: { 'shape': 'ellipse' } },
+        { selector: 'node[type="locus"]', style: { 'shape': 'round-diamond' } },
+        {
+          selector: 'edge',
+          style: {
+            'width': 2,
+            'line-color': 'rgb(var(--border))',
+            'target-arrow-color': 'rgb(var(--border))',
+            'curve-style': 'straight',
+            'target-arrow-shape': 'triangle',
+            'opacity': 0.8
+          }
+        },
+        { selector: '.dim',
+          style: { 'opacity': 0.15 }
+        },
+        { selector: '.focus',
+          style: { 'border-width': 4, 'border-color': 'rgb(var(--accent))' }
+        }
+      ]
+    });
+
+    // Click to open article if present
+    cy.on('tap', 'node', evt => {
+      const n = evt.target.data();
+      if (n.article) {
+        // left click: focus, ctrl/cmd: open article
+        if (evt.originalEvent.ctrlKey || evt.originalEvent.metaKey) {
+          location.href = n.article;
+          return;
+        }
+      }
+      focusNode(n.id, true);
+    });
+
+    // Focus logic: center, zoom, dim others, undim neighbors
+    function focusNode(id, setUrl) {
+      const node = cy.getElementById(id);
+      if (!node) return;
+      const neighborhood = node.closedNeighborhood(); // node + neighbors + edges
+      cy.elements().addClass('dim');
+      neighborhood.removeClass('dim');
+      node.addClass('focus');
+
+      const padding = 80;
+      cy.animate({
+        fit: { eles: neighborhood.nodes(), padding },
+        duration: 420,
+        easing: 'ease-out-cubic'
+      });
+
+      if (setUrl) {
+        const u = new URL(location.href);
+        u.searchParams.set('node', id);
+        history.replaceState({}, '', u);
+      }
+    }
+
+    function clearFocus() {
+      cy.elements().removeClass('dim focus');
+    }
+
+    // Deep link support ?node=velandor
+    const params = new URLSearchParams(location.search);
+    const start = params.get('node');
+    if (start) {
+      // small delay so layout settles
+      setTimeout(() => focusNode(start, false), 300);
+    }
+
+    // Escape clears focus
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') clearFocus(); });
+
+    // Theme selector on the page
+    const sel = document.getElementById('themeSel');
+    sel.value = document.documentElement.getAttribute('data-theme') || 'quartz';
+    sel.addEventListener('change', () => setTheme(sel.value));
+
+    // Rerun style when theme changes (Cytoscape reads computed styles live)
+    const obs = new MutationObserver(() => cy.style().update());
+    obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+  </script>
+</body>
+</html>
