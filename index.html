@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Rook.works - 2026 Lander (Future Dusk)</title>
-	<link rel="icon" type="image/svg+xml" href="favicon.svg"
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -144,7 +144,7 @@
               },
             }),
             React.createElement("iframe", {
-              src: "hexadecaform.html", // adjust path if needed
+              src: "hexadecaform.html",
               title: "Support Hexdecaform demo",
               className: "w-full rounded-2xl border",
               style: {
@@ -197,7 +197,8 @@
         () => heroSlides[Math.floor(Math.random() * heroSlides.length)],
         [heroSlides]
       );
-		        const projects = useMemo(
+
+      const projects = useMemo(
         () => [
           {
             t: "Training attendance architecture",
@@ -224,6 +225,7 @@
         ],
         []
       );
+
       return React.createElement(
         "div",
         {
@@ -239,6 +241,7 @@
               mist,
           },
         },
+
         // Header
         React.createElement(
           "header",
@@ -252,34 +255,38 @@
               className:
                 "mx-auto max-w-7xl px-4 py-3 flex items-center gap-6",
             },
-React.createElement("div", {
-  className: "w-8 h-8 rounded-lg",
-  style: {
-    background:
-      "conic-gradient(from 180deg, " + key + ", " + key2 + ")",
 
-    WebkitMaskImage: "url('/img/rook-mask.svg')",
-    maskImage: "url('/img/rook-mask.svg')",
+            // brand block (icon + wordmark)
+            React.createElement(
+              "div",
+              { className: "flex items-center gap-3" },
+              React.createElement("div", {
+                className: "w-8 h-8 rounded-lg",
+                style: {
+                  background:
+                    "conic-gradient(from 180deg, " + key + ", " + key2 + ")",
 
-    WebkitMaskRepeat: "no-repeat",
-    maskRepeat: "no-repeat",
+                  WebkitMaskImage: "url('/img/rook-mask.svg')",
+                  maskImage: "url('/img/rook-mask.svg')",
 
-    WebkitMaskPosition: "center",
-    maskPosition: "center",
+                  WebkitMaskRepeat: "no-repeat",
+                  maskRepeat: "no-repeat",
 
-    WebkitMaskSize: "contain",
-    maskSize: "contain",
+                  WebkitMaskPosition: "center",
+                  maskPosition: "center",
 
-    maskMode: "luminance"
-  },
-})
-
+                  WebkitMaskSize: "contain",
+                  maskSize: "contain",
+                },
+              }),
               React.createElement(
                 "span",
                 { className: "font-semibold tracking-wide" },
                 "Rook.works"
               )
             ),
+
+            // nav
             React.createElement(
               "nav",
               {
@@ -307,6 +314,8 @@ React.createElement("div", {
                 "Contact"
               )
             ),
+
+            // CTA
             React.createElement(
               "a",
               {
@@ -323,6 +332,7 @@ React.createElement("div", {
             )
           )
         ),
+
         // Hero
         React.createElement(
           "section",
@@ -361,6 +371,7 @@ React.createElement("div", {
                 "div",
                 { className: "mt-8 flex flex-wrap gap-3" },
                 React.createElement(
+
                   "a",
                   {
                     href: "#playbook",
@@ -476,6 +487,7 @@ React.createElement("div", {
             )
           )
         ),
+
         // Services
         React.createElement(
           "section",
@@ -543,27 +555,28 @@ React.createElement("div", {
             })
           )
         ),
+
         // Work grid
-               React.createElement(
+        React.createElement(
           "section",
           { id: "work", className: "mx-auto max-w-7xl px-4 pt-6 pb-14" },
           React.createElement(
             "div",
-            { className: "flex items-end justify-between" },
+            { className: "flex items-end justify_between".replace("_", "-") },
             React.createElement(
               "h2",
               { className: "text-2xl font-semibold" },
               "Recent work"
             ),
-React.createElement(
-  "a",
-  {
-    className:
-      "text-sm text-slate-300 hover:text-white",
-    href: "/projects/index.html",
-  },
-  "All projects ->"
-)
+            React.createElement(
+              "a",
+              {
+                className:
+                  "text-sm text-slate-300 hover:text-white",
+                href: "/projects/index.html",
+              },
+              "All projects ->"
+            )
           ),
           React.createElement(
             "div",
@@ -580,6 +593,7 @@ React.createElement(
                 },
                 React.createElement(
                   "div",
+
                   { className: "h-36 relative overflow-hidden" },
                   p.img
                     ? React.createElement("img", {
@@ -623,6 +637,7 @@ React.createElement(
 
         // Hexdecaform
         React.createElement(HexdecaformCard),
+
         // Case + Agentic
         React.createElement(
           "section",
@@ -719,6 +734,7 @@ React.createElement(
             )
           )
         ),
+
         // Contact
         React.createElement(
           "section",
@@ -791,6 +807,7 @@ React.createElement(
             )
           )
         ),
+
         // Footer
         React.createElement(
           "footer",
