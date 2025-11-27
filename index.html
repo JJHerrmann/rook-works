@@ -260,25 +260,14 @@
             React.createElement(
               "div",
               { className: "flex items-center gap-3" },
-              React.createElement("div", {
+
+              // ICON
+              React.createElement("img", {
+                src: "/img/rook-mask.svg",
                 className: "w-8 h-8 rounded-lg",
-                style: {
-                  background:
-                    "conic-gradient(from 180deg, " + key + ", " + key2 + ")",
-
-                  WebkitMaskImage: "url('/img/rook-mask.svg')",
-                  maskImage: "url('/img/rook-mask.svg')",
-
-                  WebkitMaskRepeat: "no-repeat",
-                  maskRepeat: "no-repeat",
-
-                  WebkitMaskPosition: "center",
-                  maskPosition: "center",
-
-                  WebkitMaskSize: "contain",
-                  maskSize: "contain",
-                },
               }),
+
+              // TEXT
               React.createElement(
                 "span",
                 { className: "font-semibold tracking-wide" },
@@ -371,7 +360,6 @@
                 "div",
                 { className: "mt-8 flex flex-wrap gap-3" },
                 React.createElement(
-
                   "a",
                   {
                     href: "#playbook",
