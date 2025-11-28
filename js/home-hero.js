@@ -165,4 +165,46 @@
               style: { height: "1px", background: line }
             }),
             h(
-// JavaScript Document
+              "div",
+              {
+                className:
+                  "mt-4 grid grid-cols-2 gap-3 text-xs text-slate-300"
+              },
+              h(
+                "div",
+                { className: "space-y-1" },
+                h(
+                  "p",
+                  { className: "font-medium text-slate-100" },
+                  "For humans"
+                ),
+                h(
+                  "p",
+                  null,
+                  "Plain language docs, training, and diagrams that stop the shoulder taps."
+                )
+              ),
+              h(
+                "div",
+                { className: "space-y-1" },
+                h(
+                  "p",
+                  { className: "font-medium text-slate-100" },
+                  "For systems"
+                ),
+                h(
+                  "p",
+                  null,
+                  "Data models, automations, and flows that stop breaking every quarter."
+                )
+              )
+            )
+          )
+        )
+      )
+    );
+  }
+
+  // Expose to the global scope so page-home.js can see it
+  window.RookworksHero = RookworksHero;
+})();
