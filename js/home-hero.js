@@ -181,23 +181,21 @@
                 h(
                   "p",
                   null,
-                  "Plain language docs, training, and diagrams that stop the shoulder taps."
-                )
-              ),
-              h(
-                "div",
-                { className: "space-y-1" },
-                h(
-                  "p",
-                  { className: "font-medium text-slate-100" },
-                  "For systems"
-                ),
-                h(
-                  "p",
-                  null,
-                  "Data models, automations, and flows that stop breaking every quarter."
-                )
-              )
+                                "Plain language docs, training, and diagrams that stop the shoulder taps."
+            )
+          ),
+          h(
+            "div",
+            { className: "space-y-1" },
+            h(
+              "p",
+              { className: "font-medium text-slate-100" },
+              "For systems"
+            ),
+            h(
+              "p",
+              null,
+              "Data models, automations, and flows that stop breaking every quarter."
             )
           )
         )
