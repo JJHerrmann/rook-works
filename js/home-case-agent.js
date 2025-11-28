@@ -1,4 +1,4 @@
-// JavaScript Document(function () {
+(function () {
   const { createElement: h } = React;
   const key = "#3a2a6f";
   const key2 = "#6a329f";

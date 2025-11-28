@@ -1,4 +1,5 @@
-// JavaScript Document(function () {
+// JavaScript Document
+(function () {
   const { createElement: h } = React;
   const line = "#1b1f2a";
 
