@@ -234,10 +234,11 @@
       border-radius: var(--radius);
       border: 1px solid var(--line);
       background:
-        linear-gradient(180deg, rgba(255,255,255,0.04), rgba(0,0,0,0.16)),
+        linear-gradient(180deg, rgba(210,214,222,0.08), rgba(0,0,0,0.16)),
         var(--panel);
       box-shadow: var(--shadow);
       overflow: hidden;
+      isolation: isolate;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -257,6 +258,19 @@
       border: 2px solid #ff4d4d;
     }
 
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(135deg, rgba(190, 195, 205, 0.08) 25%, transparent 25% 50%, rgba(190, 195, 205, 0.08) 50% 75%, transparent 75%),
+        linear-gradient(45deg, rgba(190, 195, 205, 0.04) 25%, transparent 25% 50%, rgba(190, 195, 205, 0.04) 50% 75%, transparent 75%),
+        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.08));
+      background-size: 28px 28px, 28px 28px, 100% 100%;
+      opacity: 0.35;
+      pointer-events: none;
+    }
+
     .card::after {
       content: "";
       position: absolute;
@@ -266,6 +280,11 @@
       border-radius: 999px;
       background: radial-gradient(circle, rgba(106,227,255,0.12), transparent 70%);
       pointer-events: none;
+    }
+
+    .card > * {
+      position: relative;
+      z-index: 1;
     }
 
     .card-index {
