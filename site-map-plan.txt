@@ -1,0 +1,178 @@
+Rook.works Site Map and Portfolio Plan
+
+Goal
+- Position the site for remote HR Generalist, HRIS, People Ops, Business Analyst, and internal systems roles.
+- Make the site read as a professional portfolio, not a demo catalog.
+
+Primary Message
+- I help HR teams run cleaner operations through better process design, documentation, reporting, and lightweight systems.
+- Secondary strength: building internal tools and automations that support compliance, training, leave, records, and handoffs.
+
+Target Audience
+- HR managers and directors
+- People operations and HRIS teams
+- Operations leaders
+- Hiring managers for HR Generalist and BA-adjacent roles
+- Small and mid-size teams that need process cleanup and tools
+
+Recommended Site Structure
+1. Home
+- Hero with role-specific headline
+- Short value proposition
+- CTAs: View case studies, Download resume, Contact
+- Proof bar with key HR capabilities
+- Featured case studies
+- Capabilities summary
+- About
+- Contact
+
+2. Case Studies
+- 3 featured portfolio stories only
+- Each case study should include:
+  - problem
+  - context / stakeholders
+  - your role
+  - tools used
+  - solution
+  - outcome / measurable impact
+- Recommended featured items:
+  - Training Attendance Architecture
+  - Hexadecaform Intake
+  - One internal reporting / workflow automation example
+
+3. Capabilities
+- HR operations support
+- Leave / FMLA / ADA tracking support
+- Offboarding / onboarding workflows
+- Training and development coordination
+- Time and attendance auditing
+- Personnel records and data hygiene
+- HRIS / spreadsheet / workflow tooling
+- Employee communications and documentation
+
+4. About
+- Short, direct bio
+- Experience summary
+- Types of teams supported
+- Why you work in HR systems / ops
+- Tool stack and working style
+
+5. Resume
+- PDF download or direct page summary
+- Keep it easy to find
+
+6. Contact
+- Email link
+- LinkedIn link
+- Optional calendar link
+- Short form only if it is actually monitored
+
+7. Archive / Experiments
+- Keep creative or unrelated projects here
+- Do not lead with these on the homepage
+- Examples: worldbuilding, merch, side concepts, visual experiments
+
+Home Page Priority
+- Lead with HR, process, and systems
+- Show proof fast
+- Keep visual polish, but remove anything that feels whimsical or off-domain
+- Make the tone reliable, organized, and discreet
+
+Content Direction
+- Use terms that match the job lane:
+  - compliance
+  - training
+  - records
+  - leave administration
+  - offboarding
+  - employee relations support
+  - HRIS
+  - reporting
+  - workflow improvement
+  - documentation
+- Avoid language that feels too game-like, fantasy-heavy, or product-lab experimental on the main site
+
+Design Direction
+- Clean, trustworthy, enterprise-leaning
+- Strong typography and spacing
+- Dark or muted palette is fine if it stays readable and professional
+- Visual energy should support credibility, not distract from it
+
+Current Cleanup Needed
+- Fix broken project links so filenames match exactly
+- Replace empty project index with a real project hub
+- Remove or demote unrelated work from the homepage nav
+- Make contact paths real
+- Add outcome-oriented copy to each case study
+
+Suggested Build Order
+1. Fix broken project links and project index
+2. Rewrite the homepage hero and proof bar
+3. Rework the services section into capability cards
+4. Rewrite case studies with HR-specific outcomes
+5. Add About, Resume, and Contact sections/pages
+6. Move unrelated experiments into Archive
+
+Success Criteria
+- A hiring manager can understand the role fit in under 20 seconds
+- The site clearly signals HR operations plus systems thinking
+- Case studies prove practical, real-world support work
+- Contact and resume are easy to find
+- The site no longer reads like a broad creative demo collection
+
+Example Home Page Copy
+
+Hero
+- Eyebrow: HR Operations + HRIS + Internal Tools
+- H1: I build cleaner HR systems for teams that need order, compliance, and follow-through.
+- Subhead: I help HR teams handle training, leave tracking, offboarding, records, and workflow cleanup with practical systems that are easy to maintain.
+- Primary CTA: View case studies
+- Secondary CTA: Download resume
+- Tertiary CTA: Contact me
+
+Proof Bar
+- FMLA / ADA workflow support
+- Offboarding and exit processing
+- Training and development coordination
+- Time and attendance auditing
+- Personnel records and data hygiene
+- HRIS reporting and workflow improvement
+
+Intro Section
+- Heading: What I do
+- Body: I support HR and operations teams with the systems behind the work. That means finding process gaps, documenting the current state, building better trackers and workflows, and making sure the people doing the work have something reliable to use.
+
+Featured Case Studies
+1. Training Attendance Architecture
+- Problem: training data was inconsistent, hard to audit, and difficult to export cleanly.
+- My role: rebuilt the structure, validation, and reporting flow.
+- Outcome: cleaner records, easier review, and a more reliable handoff to the training log.
+
+2. Hexadecaform Intake
+- Problem: one intake process had too many manual paths and too much room for errors.
+- My role: designed the intake structure and downstream flow model.
+- Outcome: a clearer handoff system that reduces confusion and makes requests easier to route.
+
+3. Internal Reporting / Automation Example
+- Problem: recurring admin work was taking too much time and depended on manual follow-up.
+- My role: mapped the process, identified repeated steps, and built a lighter workflow.
+- Outcome: faster processing, better visibility, and less rework.
+
+Capabilities Section
+- HR operations support
+- Leave administration support
+- Offboarding and onboarding workflow design
+- Training and documentation support
+- Records cleanup and audit readiness
+- HRIS and spreadsheet-based reporting
+- Internal tools and lightweight automation
+- Cross-functional communication and stakeholder support
+
+About Section
+- Heading: About me
+- Body: I work best where HR, operations, and systems overlap. I like making messy processes more usable, clearer, and easier to trust. I care about details, documentation, confidentiality, and making sure the people inside the process can actually use what gets built.
+
+Contact Section
+- Heading: Let’s talk
+- Body: If you need help with HR operations, HRIS cleanup, training workflows, reporting, or internal tools, I’d be glad to talk through the problem and scope the right fix.
+- Links: email, LinkedIn, resume PDF
