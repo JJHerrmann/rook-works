@@ -249,7 +249,7 @@
     }
 
     .card-tall {
-      min-height: 408px;
+      grid-row: span 2;
     }
 
     /* Temporary marker for support/placeholder cards. */
@@ -483,8 +483,10 @@
       .span-3,
       .span-4,
       .span-5,
+      .card-tall,
       .hero .hero-grid {
         grid-column: auto;
+        grid-row: auto;
       }
 
       .card {
