@@ -249,12 +249,12 @@
             className: "sticky top-0 z-40 backdrop-blur border-b",
             style: { borderColor: line, background: "rgba(0,0,0,0.3)" },
           },
-          React.createElement(
-            "div",
-            {
-              className:
-                "mx-auto max-w-7xl px-4 py-3 flex items-center gap-6",
-            },
+            React.createElement(
+              "div",
+              {
+                className:
+                  "mx-auto max-w-7xl px-4 py-3 flex flex-wrap items-center gap-4",
+              },
 
             // brand block (icon + wordmark)
             React.createElement(
@@ -276,31 +276,31 @@
             ),
 
             // nav
-            React.createElement(
-              "nav",
-              {
-                className:
-                  "ml-auto hidden md:flex items-center gap-6 text-sm text-slate-300",
-              },
               React.createElement(
-                "a",
-                { className: "hover:text-white", href: "#work" },
-                "Work"
+                "nav",
+                {
+                  className:
+                  "ml-auto flex flex-wrap items-center gap-2 text-xs md:text-sm text-slate-300",
+                },
+                React.createElement(
+                  "a",
+                { className: "rounded-full border border-white/10 px-3 py-2 hover:text-white", href: "/grid/lander.html" },
+                "Grid"
               ),
               React.createElement(
                 "a",
-                { className: "hover:text-white", href: "#services" },
-                "Services"
+                { className: "rounded-full border border-white/10 px-3 py-2 hover:text-white", href: "/grid/resume.html" },
+                "Resume"
               ),
               React.createElement(
                 "a",
-                { className: "hover:text-white", href: "#case" },
-                "Case studies"
-              ),
-              React.createElement(
-                "a",
-                { className: "hover:text-white", href: "#contact" },
+                { className: "rounded-full border border-white/10 px-3 py-2 hover:text-white", href: "#contact" },
                 "Contact"
+              ),
+              React.createElement(
+                "a",
+                { className: "rounded-full border border-white/10 px-3 py-2 hover:text-white", href: "#work" },
+                "Work"
               )
             ),
 
@@ -317,7 +317,7 @@
                     "linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.15))",
                 },
               },
-              "Start a project"
+              "★ Contact"
             )
           )
         ),
