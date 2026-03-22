@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rook.works Resume</title>
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <style>
+    :root {
+      --bg: #0b0c11;
+      --panel: rgba(18, 21, 34, 0.92);
+      --line: rgba(43, 50, 79, 0.9);
+      --ink: #edf0f6;
+      --muted: #a1a8bc;
+      --accent: #6ae3ff;
+      --shadow: 0 24px 70px rgba(0, 0, 0, 0.38);
+      --radius: 24px;
+    }
+
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background:
+        radial-gradient(1200px 520px at 15% -8%, rgba(154, 122, 255, 0.22), transparent 55%),
+        radial-gradient(920px 460px at 110% 8%, rgba(106, 227, 255, 0.15), transparent 52%),
+        linear-gradient(180deg, #0d0f16 0%, #090a0f 100%);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    a { color: inherit; text-decoration: none; }
+    .shell { width: min(1280px, calc(100% - 32px)); margin: 0 auto; padding: 24px 0 48px; }
+    .topbar {
+      display: flex; justify-content: space-between; gap: 16px; align-items: center;
+      margin-bottom: 20px; padding: 14px 18px; border: 1px solid var(--line); border-radius: 999px;
+      background: rgba(10, 12, 18, 0.76); backdrop-filter: blur(16px); box-shadow: var(--shadow);
+    }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand img { width: 34px; height: 34px; }
+    .brand-text { display: grid; gap: 2px; }
+    .brand-text strong { font-size: 0.95rem; letter-spacing: 0.02em; }
+    .brand-text span { font-size: 0.76rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
+    .top-links { display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-end; }
+    .pill {
+      display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border: 1px solid var(--line);
+      border-radius: 999px; background: rgba(255, 255, 255, 0.03); color: var(--muted);
+      font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
+    }
+    .hero {
+      margin: 18px 0 22px; padding: 18px 20px; border: 1px solid var(--line); border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.14)); box-shadow: var(--shadow);
+    }
+    .hero h1 { margin: 0; font-size: clamp(1.85rem, 3vw, 3.25rem); line-height: 1.02; letter-spacing: -0.03em; }
+    .hero p { max-width: 72ch; margin: 12px 0 0; color: var(--muted); font-size: 0.98rem; line-height: 1.6; }
+    .cta-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+    .button {
+      display: inline-flex; align-items: center; justify-content: center; padding: 10px 14px; border-radius: 999px;
+      border: 1px solid var(--line); background: rgba(255,255,255,0.03); color: var(--ink);
+      font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
+    }
+    .button.primary { border-color: rgba(106,227,255,0.25); background: linear-gradient(90deg, rgba(154,122,255,0.38), rgba(106,227,255,0.22)); }
+    .grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; }
+    .card {
+      position: relative; min-height: 200px; padding: 18px; border-radius: var(--radius); border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(0,0,0,0.16)), var(--panel);
+      box-shadow: var(--shadow); overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; gap: 14px;
+    }
+    .card::after {
+      content: ""; position: absolute; inset: auto -20% -38% auto; width: 160px; height: 160px; border-radius: 999px;
+      background: radial-gradient(circle, rgba(106,227,255,0.12), transparent 70%); pointer-events: none;
+    }
+    .kicker { margin: 0 0 8px; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.16em; color: #8ca0c7; }
+    h2, h3 { margin: 0; line-height: 1.05; letter-spacing: -0.02em; }
+    h2 { font-size: clamp(1.6rem, 2.2vw, 2.6rem); }
+    h3 { font-size: 1.1rem; }
+    p { margin: 0; color: var(--muted); line-height: 1.6; font-size: 0.95rem; }
+    .stack { display: grid; gap: 10px; }
+    .row {
+      display: flex; justify-content: space-between; gap: 16px; padding: 10px 12px; border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px; background: rgba(0,0,0,0.12); color: #d8def1; font-size: 0.88rem;
+    }
+    .row span:last-child { color: var(--muted); text-align: right; }
+    .span-1 { grid-column: span 1; }
+    .span-2 { grid-column: span 2; }
+    .span-3 { grid-column: span 3; }
+    .span-5 { grid-column: 1 / -1; }
+    .metric {
+      display: inline-flex; align-items: center; gap: 8px; padding: 8px 10px; border-radius: 999px; border: 1px solid var(--line);
+      background: rgba(255,255,255,0.02); font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.12em; color: #dbe2f4; white-space: nowrap;
+    }
+    .metric b { color: var(--accent); font-weight: 700; letter-spacing: 0.06em; }
+    .metrics { display: flex; flex-wrap: wrap; gap: 10px; }
+    .footer-note { margin-top: 18px; color: var(--muted); font-size: 0.86rem; line-height: 1.6; }
+    @media (max-width: 1180px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .span-3, .span-5 { grid-column: span 2; } }
+    @media (max-width: 760px) {
+      .shell { width: min(100% - 20px, 100%); padding-top: 16px; }
+      .topbar { border-radius: 20px; align-items: flex-start; flex-direction: column; }
+      .grid { grid-template-columns: 1fr; }
+      .span-1, .span-2, .span-3, .span-5 { grid-column: auto; }
+      .card { min-height: unset; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <div class="topbar">
+      <a class="brand" href="./lander.html">
+        <img src="../img/rook-mask.svg" alt="Rook.works">
+        <span class="brand-text"><strong>Rook.works</strong><span>Resume</span></span>
+      </a>
+      <div class="top-links">
+        <a class="pill" href="./lander.html">Grid</a>
+        <a class="pill" href="./contact.html">★ Contact</a>
+        <a class="pill" href="../wttj_resume.pdf">PDF</a>
+      </div>
+    </div>
+
+    <section class="hero">
+      <h1>Personnel Processing Specialist with HR operations, HRIS, and workflow improvement experience.</h1>
+      <p>
+        Current USPS personnel processing work, supported by Excel, VBA, SAP, and a long pattern of structured
+        operations, data cleanup, and systems-minded delivery.
+      </p>
+      <div class="cta-row">
+        <a class="button primary" href="./contact.html">★ Contact</a>
+        <a class="button" href="../wttj_resume_ocr.html">OCR HTML</a>
+      </div>
+    </section>
+
+    <main class="grid">
+      <article class="card span-5">
+        <div>
+          <p class="kicker">Current role</p>
+          <h2>USPS Personnel Processing Specialist</h2>
+          <p style="margin-top: 12px;">High-volume HR operations, process analysis, and support for delays, errors, and reporting structure.</p>
+        </div>
+        <div class="stack">
+          <div class="row"><span>Focus</span><span>policy-driven operations</span></div>
+          <div class="row"><span>Tools</span><span>Excel, VBA, SAP, Zoom</span></div>
+          <div class="row"><span>Output</span><span>exceptions, risk, workload tracking</span></div>
+        </div>
+      </article>
+
+      <article class="card span-1">
+        <p class="kicker">Proof</p>
+        <h3>Core fit</h3>
+        <p>Compliance timelines, confidential handling, and supervisor support.</p>
+        <div class="metrics">
+          <span class="metric"><b>HR</b> ops</span>
+        </div>
+      </article>
+
+      <article class="card span-3">
+        <p class="kicker">Automation</p>
+        <h3>40+ hours saved monthly</h3>
+        <p>Excel, VBA, and Power Query automations with dashboards for exceptions, backlog, and capacity risks.</p>
+      </article>
+
+      <article class="card span-1">
+        <p class="kicker">Systems</p>
+        <h3>SAP HCM</h3>
+        <p>Validated master data for retirement eligibility reviews and compliance timelines.</p>
+      </article>
+
+      <article class="card span-2">
+        <p class="kicker">Earlier USPS role</p>
+        <h3>Personnel Processing Associate</h3>
+        <p>Implemented automations, improved traceability, and supported supervisors and training staff with system issues.</p>
+      </article>
+
+      <article class="card span-2">
+        <p class="kicker">Consulting</p>
+        <h3>Systems-Oriented Consultant</h3>
+        <p>Freelance design and systems work blending HTML, CSS, graphics, and client-facing delivery.</p>
+      </article>
+
+      <article class="card span-1">
+        <p class="kicker">Ops</p>
+        <h3>Shipping</h3>
+        <p>Inventory verification, order accuracy checks, and workflow improvements.</p>
+      </article>
+
+      <article class="card span-1">
+        <p class="kicker">Ops</p>
+        <h3>Service processing</h3>
+        <p>Document digitization and system standardization across acquired business units.</p>
+      </article>
+
+      <article class="card span-1">
+        <p class="kicker">Education</p>
+        <h3>Technical management</h3>
+        <p>Guilford Technical Community College and DeVry University BS in progress.</p>
+      </article>
+
+      <article class="card span-1">
+        <p class="kicker">Contact</p>
+        <h3>Fast follow-up</h3>
+        <p>Email, LinkedIn, and a clear next step for recruiters or hiring managers.</p>
+      </article>
+    </main>
+
+    <p class="footer-note">
+      This page is tuned to aggressive job searching: fast scan, strong proof, clear tools, and direct contact.
+    </p>
+  </div>
+</body>
+</html>
