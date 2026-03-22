@@ -114,6 +114,17 @@
       color: #d8def1; font-size: 0.88rem;
     }
     .row span:last-child { color: var(--muted); text-align: right; }
+    .mini-cards { display: grid; gap: 10px; }
+    .mini-card {
+      padding: 14px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(0,0,0,0.14);
+      display: grid;
+      gap: 8px;
+    }
+    .mini-card h3 { font-size: 0.95rem; }
+    .mini-card p { font-size: 0.86rem; line-height: 1.45; }
     .span-1 { grid-column: span 1; }
     .span-2 { grid-column: span 2; }
     .span-3 { grid-column: span 3; }
@@ -199,6 +210,28 @@
           <div class="row"><span>Technical Skills</span><span>Excel, VBA, SAP, Power Query, HTML, CSS</span></div>
           <div class="row"><span>Domain Skills</span><span>personnel processing, compliance, operations, training</span></div>
         </div>
+
+        <div class="mini-cards">
+          <div class="mini-card">
+            <p class="kicker">Capabilities</p>
+            <h3>HR operations / support</h3>
+            <p>Compliance timelines, confidential handling, supervisor support, and policy-driven work.</p>
+            <div class="metrics">
+              <span class="metric"><b>HR</b> ops</span>
+              <span class="metric"><b>Data</b> review</span>
+            </div>
+          </div>
+
+          <div class="mini-card">
+            <p class="kicker">Capabilities</p>
+            <h3>Automation / analysis</h3>
+            <p>Excel, VBA, Power Query, and reporting structures that reduce friction and rework.</p>
+            <div class="metrics">
+              <span class="metric"><b>40+</b> hours saved</span>
+              <span class="metric"><b>Dash</b> boards</span>
+            </div>
+          </div>
+        </div>
       </article>
 
       <section class="right-stack">
@@ -260,25 +293,6 @@
           </div>
         </article>
 
-        <article class="card">
-          <p class="kicker">Capabilities</p>
-          <h3>HR operations / support</h3>
-          <p>Compliance timelines, confidential handling, supervisor support, and policy-driven work.</p>
-          <div class="metrics">
-            <span class="metric"><b>HR</b> ops</span>
-            <span class="metric"><b>Data</b> review</span>
-          </div>
-        </article>
-
-        <article class="card">
-          <p class="kicker">Capabilities</p>
-          <h3>Automation / analysis</h3>
-          <p>Excel, VBA, Power Query, and reporting structures that reduce friction and rework.</p>
-          <div class="metrics">
-            <span class="metric"><b>40+</b> hours saved</span>
-            <span class="metric"><b>Dash</b> boards</span>
-          </div>
-        </article>
       </section>
 
       <article class="card span-5" style="min-height: 50px;">
