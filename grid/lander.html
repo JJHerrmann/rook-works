@@ -244,6 +244,14 @@
       gap: 14px;
     }
 
+    .card-short {
+      min-height: 168px;
+    }
+
+    .card-tall {
+      min-height: 408px;
+    }
+
     /* Temporary marker for support/placeholder cards. */
     .placeholder-card {
       border: 2px solid #ff4d4d;
@@ -582,7 +590,7 @@
         </article>
       </div>
 
-      <article class="card span-2">
+      <article class="card span-2 card-short">
         <span class="card-index">04</span>
         <p class="kicker">Contact</p>
         <h3>Available for remote HR Operations, HRIS, and People Systems roles.</h3>
@@ -591,9 +599,9 @@
           <a class="button primary" href="./resume.html">View resume</a>
           <a class="button" href="./contact.html">Contact me</a>
         </div>
-        <div class="stack">
-          <div class="row"><span>Email</span><span><a class="anchor" href="mailto:jacob.j.herrmann@gmail.com">jacob.j.herrmann@gmail.com</a></span></div>
-          <div class="row"><span>LinkedIn</span><span><a class="anchor" href="https://linkedin.com/in/jjherrmann" target="_blank" rel="noreferrer">jjherrmann</a></span></div>
+        <div class="metrics">
+          <span class="metric"><b>Email</b> <a class="anchor" href="mailto:jacob.j.herrmann@gmail.com">jacob.j.herrmann@gmail.com</a></span>
+          <span class="metric"><b>LinkedIn</b> <a class="anchor" href="https://linkedin.com/in/jjherrmann" target="_blank" rel="noreferrer">jjherrmann</a></span>
         </div>
       </article>
 
@@ -630,7 +638,7 @@
       </article>
 
       <!-- Placeholder/support card: keep visible but clearly marked for later refinement. -->
-      <article class="card span-1 placeholder-card">
+      <article class="card span-1 placeholder-card card-tall">
         <span class="card-index">12</span>
         <p class="kicker">Tools</p>
         <h3>Tools</h3>
