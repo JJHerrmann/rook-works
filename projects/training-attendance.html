@@ -228,6 +228,43 @@
       margin-top:6px;
     }
 
+    /* code card */
+    .code-tabs{
+      display:flex;
+      gap:6px;
+      margin-bottom:10px;
+      flex-wrap:wrap;
+    }
+    .code-tab{
+      font-size:11px;
+      padding:6px 12px;
+      border-radius:999px;
+      border:1px solid #2c355d;
+      background:#151a33;
+      color:var(--muted);
+      cursor:pointer;
+    }
+    .code-tab.is-active{
+      color:var(--accent);
+      border-color:#2c7a99;
+      background:#0f2534;
+    }
+    .code-block{
+      display:none;
+      margin:0;
+      background:#05070f;
+      border:1px solid #1f2947;
+      border-radius:10px;
+      padding:14px 16px;
+      overflow-x:auto;
+      font-family:"IBM Plex Mono",Consolas,"Courier New",monospace;
+      font-size:12px;
+      line-height:1.6;
+      color:#c9d6e3;
+    }
+    .code-block.is-active{display:block}
+    .code-block code{white-space:pre}
+
     /* STAR panel */
     .star-block{margin-bottom:14px}
     .star-label{
@@ -365,6 +402,79 @@
         </div>
         <div class="term-note">Simulated: this page doesn't send real email or write real files. The mechanics (CSV structure, Power Query combine, the dashboard math) are real and demonstrated in the downloadable workbook &rarr;</div>
       </div>
+
+      <div class="card">
+        <h2>The code behind it</h2>
+        <div class="tagline">The VBA below is a reconstruction &mdash; same mechanism as the original, generic placeholders in place of the real recipient and network path. The formulas are the real ones from the production workbook: structural table references only, nothing to strip.</div>
+
+        <div class="code-tabs">
+          <button class="code-tab is-active" data-target="code-vba" type="button">Submit macro (reconstructed)</button>
+          <button class="code-tab" data-target="code-fx" type="button">Formulas (real, unmodified)</button>
+        </div>
+
+        <pre class="code-block is-active" id="code-vba"><code>Sub SubmitToTrainingSpecialist()
+
+    Dim ws As Worksheet: Set ws = ThisWorkbook.Sheets("Intake")
+    Dim csvPath As String, dept As String, classDate As String
+    Dim fileNum As Integer, r As Long, lastRow As Long
+
+    dept = ws.Range("Department").Value
+    classDate = Format(ws.Range("ClassDate").Value, "yyyymmdd")
+    csvPath = "\\hrssc\training\intake\" &amp; dept &amp; "_" &amp; classDate &amp; ".csv"
+
+    lastRow = ws.Cells(ws.Rows.Count, "B").End(xlUp).Row
+    fileNum = FreeFile
+    Open csvPath For Output As #fileNum
+    Print #fileNum, "Name,EIN,Modifier,CreditHours"
+
+    For r = 6 To lastRow
+        If ws.Cells(r, "B").Value &lt;&gt; "" Then
+            Print #fileNum, ws.Cells(r, "B").Value &amp; "," &amp; ws.Cells(r, "C").Value &amp; "," &amp; _
+                RoundToQuarterHour(ws.Cells(r, "D").Value) &amp; "," &amp; ws.Range("CreditableHours").Value
+        End If
+    Next r
+    Close #fileNum
+
+    SendConfirmationEmail dept, classDate, lastRow - 5
+
+End Sub
+
+Function RoundToQuarterHour(hrs As Double) As Double
+    RoundToQuarterHour = Application.WorksheetFunction.Round(hrs * 4, 0) / 4
+End Function
+
+Sub SendConfirmationEmail(dept As String, classDate As String, empCount As Long)
+    Dim outApp As Object, outMail As Object
+    Set outApp = CreateObject("Outlook.Application")
+    Set outMail = outApp.CreateItem(0)
+
+    With outMail
+        .To = "training.specialist@usps.gov"
+        .Subject = "Attendance logged: " &amp; dept &amp; " " &amp; classDate
+        .Body = empCount &amp; " employees logged. CSV saved to intake folder."
+        .Send
+    End With
+End Sub</code></pre>
+
+        <pre class="code-block" id="code-fx"><code>' Attrition &mdash; Yes/No/tardy against hours available vs. earned
+=IF(C2="Yes", 1, IF(C2="no", 0, IF(C2="tardy", SUM(J2/I2), "")))
+
+' Department &mdash; parsed from "DEPT - TOPIC" course name
+=LEFT(Train_Log[[#This Row],[COURSE NAME:]], FIND(" - ", Train_Log[[#This Row],[COURSE NAME:]]) - 1)
+
+' Course Topic &mdash; same course name, right-hand side
+=MID(Train_Log[[#This Row],[COURSE NAME:]], FIND(" - ", Train_Log[[#This Row],[COURSE NAME:]]), 13)
+
+' Code &mdash; unique key: topic + start date + end date
+=MID(E2, FIND(" - ", E2) + 3, LEN(E2)) &amp; "_" &amp; TEXT(F2, "yyyymmdd") &amp; "_" &amp; TEXT(H2, "yyyymmdd")
+
+' Dashboard &mdash; single-employee lookup against the live table
+=VLOOKUP(B4, Train_Log[], 3, FALSE)
+=VLOOKUP($B$4, Train_Log[], 17, )
+
+' thematrix &mdash; live per-employee row spill for whoever is in Dashboard!B4
+=FILTER(Train_Log[], Train_Log[NAME] = Dashboard!B4, "not found")</code></pre>
+      </div>
     </div>
 
     <div>
@@ -470,6 +580,15 @@
   node.addEventListener("click", runDemo);
   node.addEventListener("keydown", function(e){
     if (e.key === "Enter" || e.key === " ") { e.preventDefault(); runDemo(); }
+  });
+
+  document.querySelectorAll(".code-tab").forEach(function(tab){
+    tab.addEventListener("click", function(){
+      document.querySelectorAll(".code-tab").forEach(function(t){ t.classList.remove("is-active"); });
+      document.querySelectorAll(".code-block").forEach(function(b){ b.classList.remove("is-active"); });
+      tab.classList.add("is-active");
+      document.getElementById(tab.dataset.target).classList.add("is-active");
+    });
   });
 })();
 </script>
