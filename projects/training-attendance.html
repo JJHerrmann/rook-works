@@ -1,130 +1,477 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8">
   <title>Training Attendance Architecture – Rook.works</title>
-  <meta name="description" content="A structured, USPS-style training attendance system with validated inputs and analytics-ready exports." />
-  <meta name="author" content="Jacob Herrmann" />
-  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
-  <link rel="canonical" href="https://rook.works/projects/training-attendance.html" />
-  <meta name="theme-color" content="#0b0c11" />
-  <meta property="og:site_name" content="Rook.works" />
-  <meta property="og:title" content="Training Attendance Architecture – Rook.works" />
-  <meta property="og:description" content="A structured, USPS-style training attendance system with validated inputs and analytics-ready exports." />
-  <meta property="og:type" content="article" />
-  <meta property="og:url" content="https://rook.works/projects/training-attendance.html" />
-  <meta property="og:image" content="https://rook.works/img/excel_vba_pa.png" />
-  <meta property="og:image:alt" content="Training Attendance Architecture project preview." />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Training Attendance Architecture – Rook.works" />
-  <meta name="twitter:description" content="A structured, USPS-style training attendance system with validated inputs and analytics-ready exports." />
-  <meta name="twitter:image" content="https://rook.works/img/excel_vba_pa.png" />
-  <meta name="twitter:image:alt" content="Training Attendance Architecture project preview." />
-  <script src="https://cdn.tailwindcss.com"></script>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Rebuilt a paper-based USPS training attendance process into a validated Excel + VBA intake, a Power Query master log, and a live dashboard — eliminating 5-10 hours a week of manual entry.">
+  <meta name="author" content="Jacob Herrmann">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+  <link rel="canonical" href="https://rook.works/projects/training-attendance.html">
+  <meta name="theme-color" content="#0e1020">
+  <meta property="og:site_name" content="Rook.works">
+  <meta property="og:title" content="Training Attendance Architecture – Rook.works">
+  <meta property="og:description" content="Rebuilt a paper-based USPS training attendance process into a validated Excel + VBA intake, a Power Query master log, and a live dashboard.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://rook.works/projects/training-attendance.html">
+  <meta property="og:image" content="https://rook.works/img/excel_vba_pa.png">
+  <meta property="og:image:alt" content="Training Attendance Architecture project preview.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Training Attendance Architecture – Rook.works">
+  <meta name="twitter:description" content="Rebuilt a paper-based USPS training attendance process into a validated Excel + VBA intake, a Power Query master log, and a live dashboard.">
+  <meta name="twitter:image" content="https://rook.works/img/excel_vba_pa.png">
+  <meta name="twitter:image:alt" content="Training Attendance Architecture project preview.">
   <style>
-    body { background: #0b0c11; color: #e5e7eb; }
+    :root{
+      --bg:#0e1020;
+      --bg2:#131734;
+      --panel:#171b33;
+      --ink:#e8eef2;
+      --muted:#9fb0bf;
+      --line:#30365a;
+      --accent:#6ae3ff;
+      --good:#22c55e;
+      --warn:#fbbf24;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background:linear-gradient(180deg,var(--bg2),var(--bg));
+      color:var(--ink);
+      font:14px system-ui,Segoe UI,Roboto,Arial,sans-serif;
+    }
+    a{color:inherit}
+    .wrap{
+      max-width:1100px;
+      margin:0 auto;
+      padding:24px 16px 48px;
+    }
+    .back{
+      font-size:12px;
+      color:var(--muted);
+      text-decoration:none;
+    }
+    .back:hover{color:var(--ink)}
+    h1{
+      font-size:26px;
+      margin:10px 0 4px;
+    }
+    .sub{
+      font-size:14px;
+      color:var(--muted);
+      max-width:60ch;
+      margin-bottom:18px;
+    }
+    .badge-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-bottom:24px;
+    }
+    .metric{
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+      padding:8px 14px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:#151a33;
+      min-width:120px;
+    }
+    .metric .num{
+      font-size:18px;
+      font-weight:700;
+      color:var(--accent);
+    }
+    .metric .lbl{
+      font-size:11px;
+      color:var(--muted);
+    }
+
+    .layout{
+      display:grid;
+      grid-template-columns:minmax(0,1.15fr) minmax(0,0.85fr);
+      gap:20px;
+    }
+    @media(max-width:820px){
+      .layout{grid-template-columns:1fr}
+    }
+    .card,.panel{
+      background:var(--panel);
+      border-radius:16px;
+      border:1px solid #262c4a;
+      box-shadow:0 10px 22px rgba(0,0,0,.4);
+      padding:16px 18px;
+      margin-bottom:20px;
+    }
+    .card h2, .panel h2{
+      font-size:16px;
+      margin:0 0 4px;
+    }
+    .card .tagline, .panel .tagline{
+      font-size:12px;
+      color:var(--muted);
+      margin-bottom:14px;
+    }
+
+    /* pipeline diagram */
+    .pipeline{
+      display:flex;
+      flex-wrap:wrap;
+      align-items:stretch;
+      gap:6px;
+      margin-bottom:6px;
+    }
+    .pipe-node{
+      flex:1 1 130px;
+      background:#101431;
+      border:1px solid #262c4a;
+      border-radius:12px;
+      padding:10px 12px;
+      font-size:12px;
+      display:flex;
+      flex-direction:column;
+      gap:4px;
+      cursor:default;
+    }
+    .pipe-node .pn-title{
+      font-weight:600;
+      color:var(--ink);
+    }
+    .pipe-node .pn-sub{
+      color:var(--muted);
+      font-size:11px;
+      line-height:1.4;
+    }
+    .pipe-node.is-live{
+      cursor:pointer;
+      border-color:#2c7a99;
+    }
+    .pipe-node.is-live:hover{
+      border-color:var(--accent);
+    }
+    .pipe-arrow{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:var(--muted);
+      font-size:16px;
+      flex:0 0 18px;
+    }
+    @media(max-width:700px){
+      .pipeline{flex-direction:column}
+      .pipe-arrow{transform:rotate(90deg); flex:0 0 auto; padding:2px 0}
+    }
+
+    .run-btn{
+      font-size:12px;
+      padding:8px 16px;
+      border-radius:999px;
+      border:1px solid #2c7a99;
+      background:#0f2534;
+      color:var(--accent);
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      margin:10px 0 4px;
+    }
+    .run-btn:hover{background:#123049}
+    .run-btn:disabled{opacity:.5; cursor:default}
+
+    .term{
+      margin-top:10px;
+      background:#05070f;
+      border:1px solid #1f2947;
+      border-radius:10px;
+      overflow:hidden;
+      display:none;
+    }
+    .term.is-open{display:block}
+    .term-head{
+      display:flex;
+      align-items:center;
+      gap:6px;
+      padding:7px 10px;
+      background:#0a0e1f;
+      border-bottom:1px solid #1f2947;
+      font-size:11px;
+      color:var(--muted);
+    }
+    .term-dot{width:9px;height:9px;border-radius:50%;background:#3a4260}
+    .term-body{
+      padding:10px 12px;
+      font-family:"IBM Plex Mono",Consolas,"Courier New",monospace;
+      font-size:12px;
+      line-height:1.65;
+      min-height:60px;
+      max-height:280px;
+      overflow-y:auto;
+      white-space:pre-wrap;
+    }
+    .term-line-cmd{color:var(--accent)}
+    .term-line-ok{color:var(--good)}
+    .term-line-info{color:var(--ink)}
+    .term-line-muted{color:var(--muted)}
+    .term-cursor{
+      display:inline-block;
+      width:6px;
+      height:12px;
+      background:var(--accent);
+      vertical-align:text-bottom;
+      animation:blink 1s steps(1) infinite;
+    }
+    @keyframes blink{50%{opacity:0}}
+    .term-note{
+      font-size:11px;
+      color:var(--muted);
+      margin-top:6px;
+    }
+
+    /* STAR panel */
+    .star-block{margin-bottom:14px}
+    .star-label{
+      font-weight:700;
+      font-size:11px;
+      letter-spacing:.04em;
+      text-transform:uppercase;
+      color:var(--accent);
+      margin-bottom:3px;
+    }
+    .star-text{
+      font-size:13px;
+      color:var(--ink);
+      line-height:1.55;
+    }
+    .star-text ul{
+      margin:6px 0 0;
+      padding-left:18px;
+    }
+    .star-text li{margin-bottom:4px}
+
+    .pill-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:6px;
+      margin:6px 0 16px;
+    }
+    .pill{
+      font-size:11px;
+      padding:4px 9px;
+      border-radius:999px;
+      border:1px solid #2c355d;
+      background:#151a33;
+      color:var(--muted);
+    }
+
+    .dl-btn{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-size:12px;
+      padding:9px 16px;
+      border-radius:10px;
+      border:1px solid #2c355d;
+      background:#151a33;
+      color:var(--ink);
+      text-decoration:none;
+      margin-top:4px;
+    }
+    .dl-btn:hover{border-color:var(--accent)}
+    .dl-note{
+      font-size:11px;
+      color:var(--muted);
+      margin-top:6px;
+      line-height:1.5;
+    }
+
+    footer.cta{
+      margin-top:8px;
+      padding:20px;
+      border-radius:16px;
+      border:1px solid #262c4a;
+      background:rgba(0,0,0,.2);
+    }
+    footer.cta h3{margin:0 0 6px; font-size:17px}
+    footer.cta p{color:var(--muted); margin:0 0 12px; max-width:60ch}
+    .cta-link{
+      display:inline-block;
+      padding:10px 20px;
+      border-radius:999px;
+      background:#6d28d9;
+      color:#fff;
+      text-decoration:none;
+      font-size:13px;
+    }
+    .cta-link:hover{background:#5b21b6}
   </style>
 </head>
 <body>
-  <div id="root"></div>
+<div class="wrap">
+  <a class="back" href="/index.html">&larr; Back to home</a>
+  <h1>Training Attendance Architecture</h1>
+  <p class="sub">A USPS HR Training Department ran on paper logs and copy-paste chaos. This is the rebuild: a validated Excel + VBA intake, a Power Query master log, and a dashboard the Training Specialist actually uses.</p>
+
+  <div class="badge-row">
+    <div class="metric"><span class="num">40&ndash;50 hrs</span><span class="lbl">admin time/month reclaimed</span></div>
+    <div class="metric"><span class="num">100%</span><span class="lbl">of logs previously hand-entered</span></div>
+    <div class="metric"><span class="num">400%</span><span class="lbl">capacity increase over original sheet</span></div>
+    <div class="metric"><span class="num">DMAIC</span><span class="lbl">Lean Six Sigma framework used</span></div>
+  </div>
+
+  <div class="layout">
+    <div>
+      <div class="card">
+        <h2>How data actually moves</h2>
+        <div class="tagline">Click the intake node to see what happens when a trainer hits Submit.</div>
+
+        <div class="pipeline">
+          <div class="pipe-node is-live" id="node-intake" role="button" tabindex="0">
+            <span class="pn-title">1. Intake Sheet</span>
+            <span class="pn-sub">Trainer enters roster + late/early modifiers, hits Submit</span>
+          </div>
+          <div class="pipe-arrow">&rarr;</div>
+          <div class="pipe-node">
+            <span class="pn-title">2. VBA on Submit</span>
+            <span class="pn-sub">Writes a per-employee CSV line, emails a confirmation</span>
+          </div>
+          <div class="pipe-arrow">&rarr;</div>
+          <div class="pipe-node">
+            <span class="pn-title">3. Watched Folder</span>
+            <span class="pn-sub">CSVs land here, one per class, named by dept + date</span>
+          </div>
+          <div class="pipe-arrow">&rarr;</div>
+          <div class="pipe-node">
+            <span class="pn-title">4. Power Query</span>
+            <span class="pn-sub">Combines every file in the folder into one table</span>
+          </div>
+          <div class="pipe-arrow">&rarr;</div>
+          <div class="pipe-node">
+            <span class="pn-title">5. Master Log</span>
+            <span class="pn-sub">Live <code>Train_Log</code> table, one row per class entry</span>
+          </div>
+          <div class="pipe-arrow">&rarr;</div>
+          <div class="pipe-node">
+            <span class="pn-title">6. Dashboard</span>
+            <span class="pn-sub">Assigned vs. attended, hours earned by topic</span>
+          </div>
+        </div>
+
+        <button class="run-btn" id="run-btn" type="button">&#9654; Submit to Training Specialist</button>
+
+        <div class="term" id="term">
+          <div class="term-head"><span class="term-dot"></span><span class="term-dot"></span><span class="term-dot"></span>&nbsp;intake_submit.vba &mdash; simulated output</div>
+          <div class="term-body" id="term-body"></div>
+        </div>
+        <div class="term-note">Simulated: this page doesn't send real email or write real files. The mechanics (CSV structure, Power Query combine, the dashboard math) are real and demonstrated in the downloadable workbook &rarr;</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="panel">
+        <h2>Case study</h2>
+        <div class="tagline">DMAIC format &mdash; Define, Measure, Analyze, Improve, Control</div>
+
+        <div class="star-block">
+          <div class="star-label">Situation</div>
+          <div class="star-text">The training department relied on trainer-submitted paper attendance logs. They were frequently inconsistent, slow to transcribe, and often missing EINs, course data, or how to handle attendance edge cases like a late arrival or early departure. Manual entry consumed 5&ndash;10 hours a week &mdash; time that came directly out of the Training Specialist's capacity to build curriculum, manage trainer quality, or run compliance reporting.</div>
+        </div>
+
+        <div class="star-block">
+          <div class="star-label">Role</div>
+          <div class="star-text">Sole builder. Owned the process mapping, the tool design, and the rollout, using a Lean Six Sigma DMAIC frame from problem statement through sustainment.</div>
+        </div>
+
+        <div class="star-block">
+          <div class="star-label">Action</div>
+          <div class="star-text">
+            <ul>
+              <li>Built a digital tracker with preloaded employee IDs, dropdowns for trainers and course types, and auto-calculating time fields with quarter-hour-rounded late/early modifiers.</li>
+              <li>Wrote VBA to generate a per-employee CSV on submit and email a completion confirmation to the Training Specialist.</li>
+              <li>Built a Power-Query-powered Master Log that combines every CSV dropped in a watched folder into one live table, updating automatically.</li>
+              <li>Locked formula cells, standardized entry templates across trainers, and documented the process for onboarding.</li>
+              <li>Layered a dashboard on the Master Log: assigned vs. attended, credit hours earned by topic, per-employee lookup.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="star-block">
+          <div class="star-label">Result</div>
+          <div class="star-text">Manual data entry eliminated for the Training Specialist, whose time shifted from transcription to curriculum design and trainer-quality management. The system is resilient to edge cases and staff turnover, and training data is now auditable, scalable, and modernized &mdash; a foundation the department can keep building on, not a one-off fix.</div>
+        </div>
+
+        <div class="pill-row">
+          <span class="pill">Excel (Advanced + VBA)</span>
+          <span class="pill">Power Query</span>
+          <span class="pill">Microsoft Forms &amp; Power Automate (planning)</span>
+          <span class="pill">Lean Six Sigma DMAIC</span>
+          <span class="pill">Process Mapping &amp; SOP Restoration</span>
+          <span class="pill">KPI Design</span>
+        </div>
+
+        <a class="dl-btn" href="/downloads/training-attendance-demo.xlsm" download>&#8681; Download the demo workbook</a>
+        <div class="dl-note">600 synthetic training records, real department/course structure, working formulas throughout &mdash; no real employee data. Enable macros to see the VBA; the tracked formulas work without them.</div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="cta">
+    <h3>Need a similar build?</h3>
+    <p>Reach out and I will outline a clear, scope-locked solution.</p>
+    <a class="cta-link" href="/index.html#contact">Get in touch</a>
+  </footer>
+</div>
+
 <script>
-  window.PROJECT_DATA = {
-    title: "Training Attendance Architecture",
-    description: "A structured, USPS-style training attendance system with validated inputs and analytics-ready exports.",
-    hero: "/img/excel_vba_pa.png",
-    summary: "Rebuilt a messy, inconsistent training attendance process into a clean workbook: validated trainer and org fields, consistent student entries, auto-generated class codes, and an export sheet designed to feed a central Training Master Log.",
-    images: [
-      "/img/training_roster.png",
-      "/img/training_mock2.png"
-    ],
-    steps: [
-      "Mapped the old attendance patterns and failure points: missing metadata, inconsistent names, and incompatible exports.",
-      "Normalized the data model: stable columns for trainers, supervisors, org, department, class name, and creditable hours.",
-      "Added validation for trainers, supervisors, departments, orgs, and class names to cut down on typos and duplicates.",
-      "Designed an export sheet with a generated class code (CN_Date style) and clean rows ready for a Training Master Log or BI tools.",
-      "Documented the workflow as a repeatable pattern that can be automated later with macros, Power Automate, or SharePoint logging."
-    ]
-  };
-</script>
+(function(){
+  const lines = [
+    { t: "Validating roster... 40/40 rows OK", c: "term-line-info" },
+    { t: "Checking EIN matches against Train_Log... no mismatches found", c: "term-line-info" },
+    { t: "Applying modifiers: 3 late arrivals, 1 early departure (rounded to nearest 0.25 hr)", c: "term-line-muted" },
+    { t: "Writing CSV: PHONES_20260812.csv -> \\\\hrssc\\training\\intake\\", c: "term-line-info" },
+    { t: "Row 12: EE1029 - Present - 2.00 credit hrs", c: "term-line-muted" },
+    { t: "Row 27: EE1041 - Tardy - 1.25 credit hrs (modifier applied)", c: "term-line-muted" },
+    { t: "Power Query refresh queued on next Master Log open", c: "term-line-info" },
+    { t: "Email sent -> training.specialist@usps.gov: \"Attendance logged: PHONES 8/12 (40 employees)\"", c: "term-line-ok" },
+    { t: "Done. 40/40 employees logged in 0.4s.", c: "term-line-ok" }
+  ];
 
+  const term = document.getElementById("term");
+  const body = document.getElementById("term-body");
+  const btn = document.getElementById("run-btn");
+  const node = document.getElementById("node-intake");
 
-<!-- then load project-template.html directly below -->
+  function runDemo(){
+    btn.disabled = true;
+    body.innerHTML = "";
+    term.classList.add("is-open");
+    let i = 0;
 
-  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-
-  <script>
-    const props = window.PROJECT_DATA;
-
-    function ProjectPage() {
-      return React.createElement(
-        "div",
-        { className: "max-w-4xl mx-auto px-4 py-10" },
-
-        // Header
-        React.createElement("header", { className: "mb-12" },
-          React.createElement("a", { href: "/", className: "text-slate-400 text-sm hover:text-white" }, "Back to home"),
-          React.createElement("h1", { className: "text-4xl font-bold mt-4" }, props.title),
-          React.createElement("p", { className: "text-slate-300 mt-2 max-w-prose" }, props.description)
-        ),
-
-        // Hero image
-        props.hero &&
-        React.createElement("img", {
-          src: props.hero,
-          alt: props.title,
-          className: "w-full rounded-2xl mb-10 shadow-xl"
-        }),
-
-        // Summary
-        React.createElement("section", { className: "mb-12" },
-          React.createElement("h2", { className: "text-xl font-semibold mb-3" }, "Summary"),
-          React.createElement("p", { className: "text-slate-300 max-w-prose" }, props.summary)
-        ),
-
-        // Screenshots / visuals
-        props.images &&
-        React.createElement("section", { className: "mb-12 grid gap-4" },
-          props.images.map((src, i) =>
-            React.createElement("img", {
-              key: i,
-              src,
-              className: "w-full rounded-xl border border-slate-800 shadow"
-            })
-          )
-        ),
-
-        // Process
-        React.createElement("section", { className: "mb-12" },
-          React.createElement("h2", { className: "text-xl font-semibold mb-3" }, "How it works"),
-          React.createElement("ul", { className: "space-y-3 text-slate-300" },
-            props.steps.map((s, i) =>
-              React.createElement("li", { key: i }, "• ", s)
-            )
-          )
-        ),
-
-        // CTA
-        React.createElement("footer", { className: "mt-12 p-6 rounded-2xl border border-slate-800 bg-black/20" },
-          React.createElement("h3", { className: "text-xl font-semibold mb-2" }, "Need a similar build?"),
-          React.createElement("p", { className: "text-slate-300 mb-3 max-w-prose" },
-            "Reach out and I will outline a clear, scope-locked solution."
-          ),
-          React.createElement("a",
-            {
-              href: "/#contact",
-              className: "inline-block px-5 py-3 rounded-full bg-purple-600 hover:bg-purple-700"
-            },
-            "Get in touch"
-          )
-        )
-      );
+    function nextLine(){
+      if (i >= lines.length){
+        const cur = document.createElement("span");
+        cur.className = "term-cursor";
+        body.appendChild(cur);
+        btn.disabled = false;
+        return;
+      }
+      const el = document.createElement("div");
+      el.className = lines[i].c;
+      el.textContent = "> " + lines[i].t;
+      body.appendChild(el);
+      body.scrollTop = body.scrollHeight;
+      i++;
+      setTimeout(nextLine, i === 1 ? 250 : 320 + Math.random() * 220);
     }
+    nextLine();
+  }
 
-    ReactDOM.createRoot(document.getElementById("root")).render(
-      React.createElement(ProjectPage)
-    );
-  </script>
+  btn.addEventListener("click", runDemo);
+  node.addEventListener("click", runDemo);
+  node.addEventListener("keydown", function(e){
+    if (e.key === "Enter" || e.key === " ") { e.preventDefault(); runDemo(); }
+  });
+})();
+</script>
 </body>
 </html>
