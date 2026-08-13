@@ -1,0 +1,527 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Transfer Preference System – Rook.works</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Replaced an email-flooded, twice-yearly USPS transfer preference process with a self-service Forms intake, Power Automate notifications, an automated seniority/eligibility lookup, and a SharePoint provenance archive for union disputes.">
+  <meta name="author" content="Jacob Herrmann">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+  <link rel="canonical" href="https://rook.works/projects/transfer-preference-system.html">
+  <meta name="theme-color" content="#0e1020">
+  <meta property="og:site_name" content="Rook.works">
+  <meta property="og:title" content="Transfer Preference System – Rook.works">
+  <meta property="og:description" content="Replaced an email-flooded, twice-yearly transfer preference process with a self-service Forms intake, automated notifications, seniority lookup, and a provenance archive for union disputes.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://rook.works/projects/transfer-preference-system.html">
+  <meta property="og:image" content="https://rook.works/img/ai_cloud_icon.png">
+  <meta property="og:image:alt" content="Transfer Preference System project preview.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Transfer Preference System – Rook.works">
+  <meta name="twitter:description" content="Replaced an email-flooded, twice-yearly transfer preference process with a self-service Forms intake, automated notifications, seniority lookup, and a provenance archive for union disputes.">
+  <meta name="twitter:image" content="https://rook.works/img/ai_cloud_icon.png">
+  <meta name="twitter:image:alt" content="Transfer Preference System project preview.">
+  <style>
+    :root{
+      --bg:#0e1020;
+      --bg2:#131734;
+      --panel:#171b33;
+      --ink:#e8eef2;
+      --muted:#9fb0bf;
+      --line:#30365a;
+      --accent:#6ae3ff;
+      --good:#22c55e;
+      --warn:#fbbf24;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background:linear-gradient(180deg,var(--bg2),var(--bg));
+      color:var(--ink);
+      font:14px system-ui,Segoe UI,Roboto,Arial,sans-serif;
+    }
+    a{color:inherit}
+    .wrap{
+      max-width:1100px;
+      margin:0 auto;
+      padding:24px 16px 48px;
+    }
+    .back{
+      font-size:12px;
+      color:var(--muted);
+      text-decoration:none;
+    }
+    .back:hover{color:var(--ink)}
+    h1{
+      font-size:26px;
+      margin:10px 0 4px;
+    }
+    .sub{
+      font-size:14px;
+      color:var(--muted);
+      max-width:62ch;
+      margin-bottom:18px;
+    }
+    .badge-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-bottom:24px;
+    }
+    .metric{
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+      padding:8px 14px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:#151a33;
+      min-width:120px;
+    }
+    .metric .num{
+      font-size:18px;
+      font-weight:700;
+      color:var(--accent);
+    }
+    .metric .lbl{
+      font-size:11px;
+      color:var(--muted);
+    }
+
+    .layout{
+      display:grid;
+      grid-template-columns:minmax(0,1.15fr) minmax(0,0.85fr);
+      gap:20px;
+    }
+    @media(max-width:820px){
+      .layout{grid-template-columns:1fr}
+    }
+    .card,.panel{
+      background:var(--panel);
+      border-radius:16px;
+      border:1px solid #262c4a;
+      box-shadow:0 10px 22px rgba(0,0,0,.4);
+      padding:16px 18px;
+      margin-bottom:20px;
+    }
+    .card h2, .panel h2{
+      font-size:16px;
+      margin:0 0 4px;
+    }
+    .card .tagline, .panel .tagline{
+      font-size:12px;
+      color:var(--muted);
+      margin-bottom:14px;
+    }
+
+    /* pipeline diagram */
+    .pipeline{
+      display:flex;
+      flex-wrap:wrap;
+      align-items:stretch;
+      gap:6px;
+      margin-bottom:6px;
+    }
+    .pipe-node{
+      flex:1 1 130px;
+      background:#101431;
+      border:1px solid #262c4a;
+      border-radius:12px;
+      padding:10px 12px;
+      font-size:12px;
+      display:flex;
+      flex-direction:column;
+      gap:4px;
+      cursor:default;
+    }
+    .pipe-node .pn-title{
+      font-weight:600;
+      color:var(--ink);
+    }
+    .pipe-node .pn-sub{
+      color:var(--muted);
+      font-size:11px;
+      line-height:1.4;
+    }
+    .pipe-node.is-live{
+      cursor:pointer;
+      border-color:#2c7a99;
+    }
+    .pipe-node.is-live:hover{
+      border-color:var(--accent);
+    }
+    .pipe-node.is-archive{
+      border-color:#5c3d99;
+    }
+    .pipe-arrow{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:var(--muted);
+      font-size:16px;
+      flex:0 0 18px;
+    }
+    @media(max-width:700px){
+      .pipeline{flex-direction:column}
+      .pipe-arrow{transform:rotate(90deg); flex:0 0 auto; padding:2px 0}
+    }
+
+    .run-btn{
+      font-size:12px;
+      padding:8px 16px;
+      border-radius:999px;
+      border:1px solid #2c7a99;
+      background:#0f2534;
+      color:var(--accent);
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      margin:10px 0 4px;
+    }
+    .run-btn:hover{background:#123049}
+    .run-btn:disabled{opacity:.5; cursor:default}
+
+    .term{
+      margin-top:10px;
+      background:#05070f;
+      border:1px solid #1f2947;
+      border-radius:10px;
+      overflow:hidden;
+      display:none;
+    }
+    .term.is-open{display:block}
+    .term-head{
+      display:flex;
+      align-items:center;
+      gap:6px;
+      padding:7px 10px;
+      background:#0a0e1f;
+      border-bottom:1px solid #1f2947;
+      font-size:11px;
+      color:var(--muted);
+    }
+    .term-dot{width:9px;height:9px;border-radius:50%;background:#3a4260}
+    .term-body{
+      padding:10px 12px;
+      font-family:"IBM Plex Mono",Consolas,"Courier New",monospace;
+      font-size:12px;
+      line-height:1.65;
+      min-height:60px;
+      max-height:280px;
+      overflow-y:auto;
+      white-space:pre-wrap;
+    }
+    .term-line-cmd{color:var(--accent)}
+    .term-line-ok{color:var(--good)}
+    .term-line-info{color:var(--ink)}
+    .term-line-muted{color:var(--muted)}
+    .term-line-warn{color:var(--warn)}
+    .term-cursor{
+      display:inline-block;
+      width:6px;
+      height:12px;
+      background:var(--accent);
+      vertical-align:text-bottom;
+      animation:blink 1s steps(1) infinite;
+    }
+    @keyframes blink{50%{opacity:0}}
+    .term-note{
+      font-size:11px;
+      color:var(--muted);
+      margin-top:6px;
+    }
+
+    /* code card */
+    .code-tabs{
+      display:flex;
+      gap:6px;
+      margin-bottom:10px;
+      flex-wrap:wrap;
+    }
+    .code-tab{
+      font-size:11px;
+      padding:6px 12px;
+      border-radius:999px;
+      border:1px solid #2c355d;
+      background:#151a33;
+      color:var(--muted);
+      cursor:pointer;
+    }
+    .code-tab.is-active{
+      color:var(--accent);
+      border-color:#2c7a99;
+      background:#0f2534;
+    }
+    .code-block{
+      display:none;
+      margin:0;
+      background:#05070f;
+      border:1px solid #1f2947;
+      border-radius:10px;
+      padding:14px 16px;
+      overflow-x:auto;
+      font-family:"IBM Plex Mono",Consolas,"Courier New",monospace;
+      font-size:12px;
+      line-height:1.6;
+      color:#c9d6e3;
+    }
+    .code-block.is-active{display:block}
+    .code-block code{white-space:pre}
+    .code-note{
+      font-size:11px;
+      color:var(--muted);
+      margin-top:8px;
+      line-height:1.5;
+    }
+
+    /* STAR panel */
+    .star-block{margin-bottom:14px}
+    .star-label{
+      font-weight:700;
+      font-size:11px;
+      letter-spacing:.04em;
+      text-transform:uppercase;
+      color:var(--accent);
+      margin-bottom:3px;
+    }
+    .star-text{
+      font-size:13px;
+      color:var(--ink);
+      line-height:1.55;
+    }
+    .star-text ul{
+      margin:6px 0 0;
+      padding-left:18px;
+    }
+    .star-text li{margin-bottom:4px}
+
+    .pill-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:6px;
+      margin:6px 0 16px;
+    }
+    .pill{
+      font-size:11px;
+      padding:4px 9px;
+      border-radius:999px;
+      border:1px solid #2c355d;
+      background:#151a33;
+      color:var(--muted);
+    }
+
+    footer.cta{
+      margin-top:8px;
+      padding:20px;
+      border-radius:16px;
+      border:1px solid #262c4a;
+      background:rgba(0,0,0,.2);
+    }
+    footer.cta h3{margin:0 0 6px; font-size:17px}
+    footer.cta p{color:var(--muted); margin:0 0 12px; max-width:60ch}
+    .cta-link{
+      display:inline-block;
+      padding:10px 20px;
+      border-radius:999px;
+      background:#6d28d9;
+      color:#fff;
+      text-decoration:none;
+      font-size:13px;
+    }
+    .cta-link:hover{background:#5b21b6}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="/index.html">&larr; Back to home</a>
+  <h1>Transfer Preference System</h1>
+  <p class="sub">Twice a year, a two-week window for department-transfer preferences buried a support inbox in emails and hand-entry. This is the rebuild: self-service intake, automated notifications, an automated seniority/eligibility lookup, and a provenance archive that holds up if the union asks questions.</p>
+
+  <div class="badge-row">
+    <div class="metric"><span class="num">2&times;/yr</span><span class="lbl">preference windows automated</span></div>
+    <div class="metric"><span class="num">2 forms</span><span class="lbl">career &amp; non-career tracks</span></div>
+    <div class="metric"><span class="num">365-day</span><span class="lbl">move-hold freeze auto-flagged</span></div>
+    <div class="metric"><span class="num">100%</span><span class="lbl">submissions archived for audit</span></div>
+  </div>
+
+  <div class="layout">
+    <div>
+      <div class="card">
+        <h2>How a submission actually moves</h2>
+        <div class="tagline">Click the intake node to see what happens when an employee submits a preference selection.</div>
+
+        <div class="pipeline">
+          <div class="pipe-node is-live" id="node-intake" role="button" tabindex="0">
+            <span class="pn-title">1. Preference Form</span>
+            <span class="pn-sub">Career &amp; non-career tracks; identity + timestamp logged, resubmission allowed</span>
+          </div>
+          <div class="pipe-arrow">&rarr;</div>
+          <div class="pipe-node">
+            <span class="pn-title">2. Power Automate</span>
+            <span class="pn-sub">Posts alert to Support Teams chat, emails employee a receipt</span>
+          </div>
+          <div class="pipe-arrow">&rarr;</div>
+          <div class="pipe-node">
+            <span class="pn-title">3. Window Locks</span>
+            <span class="pn-sub">Both forms close automatically at the end of the 2-week cycle</span>
+          </div>
+          <div class="pipe-arrow">&rarr;</div>
+          <div class="pipe-node">
+            <span class="pn-title">4. Socket Lookup</span>
+            <span class="pn-sub">Matches submitter to current seniority + 365-day move-hold flag</span>
+          </div>
+          <div class="pipe-arrow">&rarr;</div>
+          <div class="pipe-node">
+            <span class="pn-title">5. Latest Wins</span>
+            <span class="pn-sub">Filtered to one row per employee &mdash; locks in final preference</span>
+          </div>
+          <div class="pipe-arrow">&rarr;</div>
+          <div class="pipe-node">
+            <span class="pn-title">6. Fetch Sheet</span>
+            <span class="pn-sub">Pick an ORG/DEPT, see who wants in &mdash; career + non-career</span>
+          </div>
+          <div class="pipe-arrow">&rarr;</div>
+          <div class="pipe-node is-archive">
+            <span class="pn-title">7. Provenance Archive</span>
+            <span class="pn-sub">SharePoint, filed by JAN YY / JUN YY, for union disputes</span>
+          </div>
+        </div>
+
+        <button class="run-btn" id="run-btn" type="button">&#9654; Submit preference selection</button>
+
+        <div class="term" id="term">
+          <div class="term-head"><span class="term-dot"></span><span class="term-dot"></span><span class="term-dot"></span>&nbsp;preference_submit.flow &mdash; simulated output</div>
+          <div class="term-body" id="term-body"></div>
+        </div>
+        <div class="term-note">Simulated: this page doesn't post to a real Teams channel or send real email. The mechanics (identity capture, latest-submission logic, the seniority/move-hold lookup) are real, described below.</div>
+      </div>
+
+      <div class="card">
+        <h2>How the eligibility lookup works</h2>
+        <div class="tagline">Reconstructed from the described logic &mdash; there's no source file for this one to pull real formulas from, unlike the training attendance rebuild.</div>
+
+        <pre class="code-block is-active" id="code-fx"><code>' Attach current seniority by matching the M365 identity captured on submission
+=XLOOKUP([@Identity], SeniorityRoster[M365 ID], SeniorityRoster[Seniority Rank], "Not found")
+
+' Flag anyone still inside the 365-day move-hold freeze
+=IF([@Identity] = "", "",
+    IF(DATEDIF(XLOOKUP([@Identity], MoveLog[M365 ID], MoveLog[Last Move Date], TODAY()-366), TODAY(), "d") &lt; 365,
+       "FROZEN until " &amp; TEXT(XLOOKUP([@Identity], MoveLog[M365 ID], MoveLog[Last Move Date], TODAY()) + 365, "mm/dd/yyyy"),
+       "Eligible"))
+
+' Keep only the latest submission per employee once the window locks
+=MAXIFS(Submissions[Timestamp], Submissions[Identity], [@Identity])
+' &hellip; then filter Submissions[Timestamp] = the MAXIFS result for that identity</code></pre>
+        <div class="code-note">Roster and move-hold source data are furnished fresh each cycle by the Hiring Support Specialist, so eligibility is checked against current records rather than whatever was true six months ago.</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="panel">
+        <h2>Case study</h2>
+        <div class="tagline">Situation &rarr; Role &rarr; Action &rarr; Result</div>
+
+        <div class="star-block">
+          <div class="star-label">Situation</div>
+          <div class="star-text">Twice a year, career employees had a two-week window to submit department-transfer preferences by emailing support staff directly &mdash; non-career employees went through the same informal channel. The window reliably flooded the inbox with change requests, including people resubmitting to update their choice. Support had to manually work through everything to find each person's most recent submission and hand-enter it into Excel, with no proof of submission if a selection was later contested.</div>
+        </div>
+
+        <div class="star-block">
+          <div class="star-label">Role</div>
+          <div class="star-text">Sole builder. Designed the intake, the automated notifications, the eligibility lookup, the downstream reporting, and the SharePoint provenance archive &mdash; and wrote the SOP documenting the process end to end.</div>
+        </div>
+
+        <div class="star-block">
+          <div class="star-label">Action</div>
+          <div class="star-text">
+            <ul>
+              <li>Built separate career and non-career Microsoft Forms capturing preference selections, M365 identity, and a timestamp on every submission &mdash; nothing overwritten, so full history is preserved.</li>
+              <li>Power Automate flow on submit: posts an alert to the Support Teams chat for live monitoring, and emails the employee a receipt as their proof of submission.</li>
+              <li>Both forms lock automatically at the close of each two-week cycle.</li>
+              <li>Designed a "socket" workbook the closed-form export gets pasted into, which looks up each submitter's current seniority and flags anyone inside the 365-day move-hold freeze, against a roster furnished fresh each cycle by the Hiring Support Specialist.</li>
+              <li>Filtered to one row per employee &mdash; latest submission wins &mdash; which locks in the final preference selection.</li>
+              <li>Built a dropdown fetch sheet so anyone can pick an ORG or DEPT and see career and non-career transfer interest for that unit.</li>
+              <li>Designed a SharePoint provenance archive (filed by JAN YY / JUN YY) backing up each cycle's original export, specifically so a union question about seniority allocation or receipt of submission can be answered with the original record.</li>
+              <li>Scoped and declined an additional stats layer (most-transferred-from departments) to keep the tool focused on what stakeholders actually needed.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="star-block">
+          <div class="star-label">Result</div>
+          <div class="star-text">Eliminated manual email-triage during the highest-volume HR event of the year on both sides: employees get provable proof of submission, and support gets seniority and eligibility attached automatically instead of checked by hand against records that might already be stale. The system is auditable by design &mdash; if a transfer decision is ever contested, the original submission and the archived record are both retrievable, not reconstructed from memory.</div>
+        </div>
+
+        <div class="pill-row">
+          <span class="pill">Microsoft Forms</span>
+          <span class="pill">Power Automate</span>
+          <span class="pill">Microsoft Teams</span>
+          <span class="pill">Outlook</span>
+          <span class="pill">Excel (lookup formulas)</span>
+          <span class="pill">SharePoint</span>
+          <span class="pill">SOP Documentation</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="cta">
+    <h3>Need a similar build?</h3>
+    <p>Reach out and I will outline a clear, scope-locked solution.</p>
+    <a class="cta-link" href="/index.html#contact">Get in touch</a>
+  </footer>
+</div>
+
+<script>
+(function(){
+  const lines = [
+    { t: "Identity verified via Microsoft 365: j.doe@usps.gov", c: "term-line-info" },
+    { t: "Preference selection recorded: 1) DEPT B  2) DEPT F  3) DEPT A", c: "term-line-muted" },
+    { t: "Timestamp logged: 2026-01-14 09:42:11 (submission #2 this cycle for this employee)", c: "term-line-muted" },
+    { t: "Power Automate flow triggered", c: "term-line-info" },
+    { t: "Posted to Support Teams chat: \"New career preference submission received\"", c: "term-line-ok" },
+    { t: "Receipt email sent -> employee: \"Your submission is recorded. Confirmation ID PL-0214-CR.\"", c: "term-line-ok" },
+    { t: "Note: submission #1 (2026-01-09) superseded -- latest wins at window close", c: "term-line-warn" },
+    { t: "Done.", c: "term-line-ok" }
+  ];
+
+  const term = document.getElementById("term");
+  const body = document.getElementById("term-body");
+  const btn = document.getElementById("run-btn");
+  const node = document.getElementById("node-intake");
+
+  function runDemo(){
+    btn.disabled = true;
+    body.innerHTML = "";
+    term.classList.add("is-open");
+    let i = 0;
+
+    function nextLine(){
+      if (i >= lines.length){
+        const cur = document.createElement("span");
+        cur.className = "term-cursor";
+        body.appendChild(cur);
+        btn.disabled = false;
+        return;
+      }
+      const el = document.createElement("div");
+      el.className = lines[i].c;
+      el.textContent = "> " + lines[i].t;
+      body.appendChild(el);
+      body.scrollTop = body.scrollHeight;
+      i++;
+      setTimeout(nextLine, i === 1 ? 250 : 320 + Math.random() * 220);
+    }
+    nextLine();
+  }
+
+  btn.addEventListener("click", runDemo);
+  node.addEventListener("click", runDemo);
+  node.addEventListener("keydown", function(e){
+    if (e.key === "Enter" || e.key === " ") { e.preventDefault(); runDemo(); }
+  });
+})();
+</script>
+</body>
+</html>
