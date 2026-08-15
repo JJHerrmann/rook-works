@@ -61,6 +61,23 @@
     .case:hover { transform:translateY(-2px); border-color:var(--accent); background:var(--panel-2); }
     .case p { color:var(--muted); }
     .tools { margin-top:auto; padding-top:22px; color:#d7dce7; font-size:14px; }
+
+    .system-map { margin-top:4px; border:1px solid var(--line); border-radius:12px; padding:22px 20px 16px; background:linear-gradient(140deg,rgba(57,77,141,.12),rgba(24,28,37,.92) 44%,rgba(101,81,142,.10)); overflow:hidden; }
+    .system-map-top { display:flex; align-items:baseline; justify-content:space-between; gap:18px; margin:0 4px 14px; }
+    .system-map-top p { margin:0; color:var(--muted); font-size:14px; }
+    .system-map-key { color:var(--accent) !important; font-size:12px !important; font-weight:700; letter-spacing:.08em; text-transform:uppercase; white-space:nowrap; }
+    .sankey-scroll { overflow-x:auto; padding-bottom:5px; }
+    #operating-sankey { display:block; width:100%; min-width:900px; height:auto; }
+    .sankey-link { fill:none; stroke-linecap:butt; transition:opacity .18s ease; }
+    .sankey-node rect { rx:4px; transition:fill .18s ease,opacity .18s ease; }
+    .sankey-node text { fill:var(--ink); font-size:13px; font-weight:650; letter-spacing:.01em; pointer-events:none; }
+    .sankey-node .sankey-meta { fill:var(--muted); font-size:11px; font-weight:500; }
+    .sankey-link.is-muted, .sankey-node.is-muted { opacity:.13; }
+    .sankey-link.is-active { opacity:.93; }
+    .sankey-node.is-active rect { filter:drop-shadow(0 0 7px rgba(170,182,236,.55)); }
+    .sankey-tooltip { min-height:22px; margin:8px 4px 0; color:var(--muted); font-size:13px; }
+    .sankey-tooltip strong { color:var(--ink); font-weight:650; }
+    @media (max-width:780px) { .system-map { padding:16px 13px 10px; } .system-map-top { display:block; } .system-map-key { margin-top:6px !important; white-space:normal; } }
     .method { display:grid; grid-template-columns:repeat(3,1fr); border:1px solid var(--line); border-radius:10px; overflow:hidden; background:var(--panel); }
     .method article { padding:24px; border-right:1px solid var(--line); }
     .method article:last-child { border-right:0; }
@@ -133,6 +150,27 @@
       </div>
     </section>
 
+
+    <section id="operating-map">
+      <div class="section-head">
+        <div><p class="eyebrow">Operating model</p><h2>The projects share a diagnostic spine.</h2></div>
+        <p>Different situations, one task: identify the failure point, design a practical intervention, then surface what has to stay true for it to keep working.</p>
+      </div>
+      <div class="system-map">
+        <div class="system-map-top">
+          <p>Hover a ribbon or stage to trace its path through the operating model.</p>
+          <p class="system-map-key">Ribbon width = reliability conditions, not volume</p>
+        </div>
+        <div class="sankey-scroll">
+          <svg id="operating-sankey" viewBox="0 0 1060 660" role="img" aria-labelledby="sankey-title sankey-desc">
+            <title id="sankey-title">Operating model from three work situations through diagnosis, action, and sustainment requirements</title>
+            <desc id="sankey-desc">Three operating situations lead to one diagnostic task, then three project-specific actions. Each action has three sustainment requirements. Ribbon width represents the count of requirements, not employees, money, or performance.</desc>
+          </svg>
+        </div>
+        <p class="sankey-tooltip" id="sankey-tooltip" aria-live="polite">Trace a path to see the practical dependency behind it.</p>
+      </div>
+    </section>
+
     <section id="work">
       <div class="section-head">
         <div><p class="eyebrow">Selected case studies</p><h2>Proof of work.</h2></div>
@@ -187,6 +225,115 @@
       <span>Business operations · reporting · process improvement</span>
     </div>
   </footer>
+  <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/d3-sankey@0.12.3/dist/d3-sankey.min.js"></script>
+
+  <script>
+    (() => {
+      const graph = {
+        nodes: [
+          { id:"email", label:"Emailed preference requests", group:"situation", detail:"Unstructured requests required manual reading and transcription." },
+          { id:"training", label:"Manual training record assembly", group:"situation", detail:"Attendance records depended on repeated manual consolidation." },
+          { id:"handoffs", label:"Fragmented request handoffs", group:"situation", detail:"Work moved through inconsistent paths with limited traceability." },
+          { id:"diagnose", label:"Diagnose the operating failure", group:"diagnose", detail:"Map inputs, decisions, exceptions, and ownership before designing." },
+          { id:"preference", label:"Structured preference review", group:"action", detail:"Standardize intake and produce usable ranked review views." },
+          { id:"tracking", label:"Training tracking model", group:"action", detail:"Create a consolidated tracking and reporting structure." },
+          { id:"routing", label:"Intake and routing pattern", group:"action", detail:"Establish consistent intake, routing, and traceable records." },
+          { id:"pref-owner", label:"Reference-data owner", group:"sustain", detail:"A designated owner maintains the approved reference data." },
+          { id:"pref-handoff", label:"Controlled source handoff", group:"sustain", detail:"A reliable path delivers the needed source information." },
+          { id:"pref-check", label:"Refresh and quality check", group:"sustain", detail:"The model is refreshed and checked before decisions rely on it." },
+          { id:"track-owner", label:"Roster data owner", group:"sustain", detail:"A named owner keeps the roster source current." },
+          { id:"track-cadence", label:"Refresh cadence", group:"sustain", detail:"Updates arrive on an agreed operational rhythm." },
+          { id:"track-check", label:"Completeness check", group:"sustain", detail:"A check catches missing or stale records before they spread." },
+          { id:"route-owner", label:"Routing owner", group:"sustain", detail:"Someone owns intake and routing stewardship." },
+          { id:"route-rules", label:"Decision-rule maintenance", group:"sustain", detail:"Routing logic stays aligned with current policy and practice." },
+          { id:"route-audit", label:"Exceptions and audit", group:"sustain", detail:"Exceptions remain visible and the record can be reconstructed." }
+        ],
+        links: [
+          { source:"email", target:"diagnose", value:3 }, { source:"training", target:"diagnose", value:3 }, { source:"handoffs", target:"diagnose", value:3 },
+          { source:"diagnose", target:"preference", value:3 }, { source:"diagnose", target:"tracking", value:3 }, { source:"diagnose", target:"routing", value:3 },
+          { source:"preference", target:"pref-owner", value:1 }, { source:"preference", target:"pref-handoff", value:1 }, { source:"preference", target:"pref-check", value:1 },
+          { source:"tracking", target:"track-owner", value:1 }, { source:"tracking", target:"track-cadence", value:1 }, { source:"tracking", target:"track-check", value:1 },
+          { source:"routing", target:"route-owner", value:1 }, { source:"routing", target:"route-rules", value:1 }, { source:"routing", target:"route-audit", value:1 }
+        ]
+      };
+      const colors = { situation:"#6677b5", diagnose:"#aab6ec", action:"#765db1", sustain:"#465370" };
+      const svg = d3.select("#operating-sankey");
+      const tooltip = d3.select("#sankey-tooltip");
+      const width = 1060, height = 660, margin = { top:30, right:228, bottom:24, left:228 };
+      const render = () => {
+        svg.selectAll("*").remove();
+        const sankey = d3.sankey()
+          .nodeId(d => d.id)
+          .nodeWidth(14)
+          .nodePadding(15)
+          .nodeAlign(d3.sankeyJustify)
+          .nodeSort((a,b) => a.id.localeCompare(b.id))
+          .extent([[margin.left, margin.top], [width - margin.right, height - margin.bottom]]);
+        const layout = sankey({ nodes:graph.nodes.map(d => ({...d})), links:graph.links.map(d => ({...d})) });
+        const links = svg.append("g").attr("aria-hidden","true").selectAll("path")
+          .data(layout.links).join("path")
+          .attr("class","sankey-link")
+          .attr("d",d3.sankeyLinkHorizontal())
+          .attr("stroke",d => colors[d.source.group])
+          .attr("stroke-opacity",d => d.source.group === "diagnose" ? .43 : .32)
+          .attr("stroke-width",d => Math.max(2,d.width));
+        const nodes = svg.append("g").selectAll("g")
+          .data(layout.nodes).join("g")
+          .attr("class","sankey-node")
+          .attr("role","group")
+          .attr("aria-label",d => d.label + ". " + d.detail)
+          .style("cursor","default");
+        nodes.append("rect")
+          .attr("x",d => d.x0).attr("y",d => d.y0)
+          .attr("width",d => d.x1-d.x0).attr("height",d => d.y1-d.y0)
+          .attr("fill",d => colors[d.group]);
+        nodes.each(function(d) {
+          const g = d3.select(this);
+          const side = d.depth < 2 ? "left" : "right";
+          const textX = side === "left" ? d.x0 - 12 : d.x1 + 12;
+          const anchor = side === "left" ? "end" : "start";
+          const lineY = (d.y0+d.y1)/2 - 7;
+          const words = d.label.split(" ");
+          const lines = [];
+          let line = "";
+          words.forEach(word => {
+            const next = (line + " " + word).trim();
+            if (next.length > 23 && line) { lines.push(line); line = word; } else line = next;
+          });
+          if (line) lines.push(line);
+          const label = g.append("text").attr("x",textX).attr("y",lineY - ((lines.length-1)*7)).attr("text-anchor",anchor);
+          lines.forEach((line, i) => label.append("tspan").attr("x",textX).attr("dy",i === 0 ? 0 : 15).text(line));
+          g.append("text").attr("class","sankey-meta").attr("x",textX).attr("y",lineY + (lines.length*15) + 4).attr("text-anchor",anchor)
+            .text(d.group === "diagnose" ? "shared task" : d.group === "sustain" ? "condition for reliability" : d.group);
+        });
+        const clear = () => { links.classed("is-muted",false).classed("is-active",false); nodes.classed("is-muted",false).classed("is-active",false); tooltip.html("Trace a path to see the practical dependency behind it."); };
+        const focus = selected => {
+          const connected = new Set([selected.id]);
+          let changed = true;
+          while (changed) {
+            changed = false;
+            layout.links.forEach(link => {
+              if (connected.has(link.source.id) || connected.has(link.target.id)) {
+                const prior = connected.size; connected.add(link.source.id); connected.add(link.target.id); if (connected.size !== prior) changed = true;
+              }
+            });
+          }
+          nodes.classed("is-muted",d => !connected.has(d.id)).classed("is-active",d => connected.has(d.id));
+          links.classed("is-muted",d => !connected.has(d.source.id) || !connected.has(d.target.id)).classed("is-active",d => connected.has(d.source.id) && connected.has(d.target.id));
+          tooltip.html("<strong>" + selected.label + "</strong> - " + selected.detail);
+        };
+        nodes.on("mouseenter",(_,d) => focus(d)).on("mouseleave",clear);
+        links.on("mouseenter",(_,d) => {
+          nodes.classed("is-muted",n => n.id !== d.source.id && n.id !== d.target.id).classed("is-active",n => n.id === d.source.id || n.id === d.target.id);
+          links.classed("is-muted",l => l !== d).classed("is-active",l => l === d);
+          tooltip.html("<strong>" + d.source.label + " to " + d.target.label + "</strong> - " + d.value + (d.value === 1 ? " reliability condition" : " reliability conditions"));
+        }).on("mouseleave",clear);
+      };
+      render();
+    })();
+  </script>
+
   <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
 </body>
 </html>
