@@ -309,18 +309,25 @@
         });
         const clear = () => { links.classed("is-muted",false).classed("is-active",false); nodes.classed("is-muted",false).classed("is-active",false); tooltip.html("Trace a path to see the practical dependency behind it."); };
         const focus = selected => {
-          const connected = new Set([selected.id]);
-          let changed = true;
-          while (changed) {
-            changed = false;
-            layout.links.forEach(link => {
-              if (connected.has(link.source.id) || connected.has(link.target.id)) {
-                const prior = connected.size; connected.add(link.source.id); connected.add(link.target.id); if (connected.size !== prior) changed = true;
-              }
-            });
+          const activeLinks = new Set();
+          const activate = link => activeLinks.add(link);
+          if (selected.group === "diagnose") {
+            layout.links.forEach(activate);
+          } else if (selected.group === "situation") {
+            layout.links.filter(l => l.source.id === selected.id).forEach(activate);
+          } else if (selected.group === "action") {
+            layout.links.filter(l => l.target.id === selected.id || l.source.id === selected.id).forEach(activate);
+          } else {
+            const parent = layout.links.find(l => l.target.id === selected.id);
+            if (parent) {
+              activate(parent);
+              layout.links.filter(l => l.target.id === parent.source.id).forEach(activate);
+            }
           }
-          nodes.classed("is-muted",d => !connected.has(d.id)).classed("is-active",d => connected.has(d.id));
-          links.classed("is-muted",d => !connected.has(d.source.id) || !connected.has(d.target.id)).classed("is-active",d => connected.has(d.source.id) && connected.has(d.target.id));
+          const activeNodes = new Set([selected.id]);
+          activeLinks.forEach(link => { activeNodes.add(link.source.id); activeNodes.add(link.target.id); });
+          nodes.classed("is-muted",d => !activeNodes.has(d.id)).classed("is-active",d => activeNodes.has(d.id));
+          links.classed("is-muted",d => !activeLinks.has(d)).classed("is-active",d => activeLinks.has(d));
           tooltip.html("<strong>" + selected.label + "</strong> - " + selected.detail);
         };
         nodes.on("mouseenter",(_,d) => focus(d)).on("mouseleave",clear);
