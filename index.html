@@ -262,7 +262,9 @@
       const tooltip = d3.select("#sankey-tooltip");
       const width = 1060, height = 660, margin = { top:30, right:228, bottom:24, left:228 };
       const render = () => {
-        svg.selectAll("*").remove();
+        // Preserve the SVG title and description so screen readers and
+        // agent accessibility trees retain the diagram's accessible name.
+        svg.selectAll("g, path, rect, text").remove();
         const sankey = d3.sankey()
           .nodeId(d => d.id)
           .nodeWidth(14)

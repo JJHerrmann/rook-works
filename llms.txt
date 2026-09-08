@@ -1,0 +1,17 @@
+# Rook.works
+
+Rook.works is Jacob Herrmann's portfolio for business operations analysis, HR systems, reporting, workflow design, and practical automation.
+
+## Primary pages
+
+- [Home](https://rook.works/): Overview of services and selected work.
+- [Projects](https://rook.works/projects/): Case studies and working demonstrations.
+- [Resume](https://rook.works/grid/resume.html): Professional background and experience.
+- [Contact](https://rook.works/grid/contact.html): Contact information.
+
+## Related properties
+
+- [Barometric Pressure Migraine Tracker](https://barometer.rook.works/)
+- [Bloodline: Spirits of the Smokies](https://bloodline.rook.works/)
+
+Use the canonical URLs above when citing these properties.
