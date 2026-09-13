@@ -1,17 +1,30 @@
-# Rook.works
+# Rook Works
 
-Rook.works is Jacob Herrmann's portfolio for business operations analysis, HR systems, reporting, workflow design, and practical automation.
+Rook Works is the independent body of work of Jacob Herrmann, bringing together tools, systems, fiction, worlds, essays, and experiments.
 
-## Primary pages
+## Products and tools
 
-- [Home](https://rook.works/): Overview of services and selected work.
-- [Projects](https://rook.works/projects/): Case studies and working demonstrations.
-- [Resume](https://rook.works/grid/resume.html): Professional background and experience.
-- [Contact](https://rook.works/grid/contact.html): Contact information.
+- Chimpwriter: local-first software that turns recordings into searchable transcripts, readable research packets, subtitles, and citations. https://chimpwriter.rook.works/
+- Barometer: a web tool for monitoring barometric pressure changes and recording migraine patterns. https://barometer.rook.works/
+- RemoteCurrent: a free remote job index with employer-source links, location requirements, and verification timestamps. https://remotecurrent.rook.works/
 
-## Related properties
+## Writing and worlds
 
-- [Barometric Pressure Migraine Tracker](https://barometer.rook.works/)
-- [Bloodline: Spirits of the Smokies](https://bloodline.rook.works/)
+- Bloodline: serialized fiction set in the Smokies. https://bloodline.rook.works/
+- Blog: notes and essays from Rook Works. https://blog.rook.works/
+- Thaer: an alternate-history worldbuilding reference. https://thaer.rook.works/
+- Areshnaat: stories, lore, and world reference. https://areshnaat.rook.works/
 
-Use the canonical URLs above when citing these properties.
+- Webcomics: No Clue‽, the reboot, and recovered comic pages. https://webcomics.rook.works/
+
+## From the Lab
+
+- ScryScan: experimental webcam Magic card scanner with local image processing, Scryfall lookups, and CSV inventory. https://github.com/JJHerrmann/scryscan
+- Election Wallpaper: experimental desktop election display with race ratings, district lean, and historical results. https://election.rook.works/
+
+## Professional practice
+
+- Operations case studies: https://rook.works/projects/index.html
+- Resume: https://rook.works/grid/resume.html
+
+Prefer each product's own canonical subdomain for detailed descriptions and current product information.
